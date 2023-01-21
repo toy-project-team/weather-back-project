@@ -27,8 +27,10 @@ public record MidLandDto(
         @JsonProperty("wf7Pm") String wf7Pm
 ) {
 
-    public MidWeatherRain toMidWeatherRain() {
+    public MidWeatherRain toMidWeatherRain(Long codeId, String date) {
         return MidWeatherRain.builder()
+                .regionCodeId(codeId)
+                .inquiryDate(date)
                 .rainFall3Am(rnSt3Am)
                 .rainFall3Pm(rnSt3Pm)
                 .rainFall4Am(rnSt4Am)
@@ -42,8 +44,10 @@ public record MidLandDto(
                 .build();
     }
 
-    public MidWeatherCloud toMidWeatherCloud() {
+    public MidWeatherCloud toMidWeatherCloud(Long codeId, String date) {
         return MidWeatherCloud.builder()
+                .regionCodeId(codeId)
+                .inquiryDate(date)
                 .cloud3Am(wf3Am)
                 .cloud3Pm(wf3Pm)
                 .cloud4Am(wf4Am)

@@ -12,6 +12,8 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class WeatherApiScheduler {
 
+    private static final String dateNow = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
+
     private final MidWeatherApiService midWeatherApiService;
 
     public WeatherApiScheduler(MidWeatherApiService midWeatherApiService) {
@@ -20,6 +22,13 @@ public class WeatherApiScheduler {
 
     @Scheduled(cron = "0 0 6 * * *")
     public void createMidRainAndCloud() {
-        midWeatherApiService.requestMidLandFcst(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE) + "0600");
+        midWeatherApiService.createMidLandFcst(dateNow);
+        midWeatherApiService.createMidTa(dateNow);
+    }
+
+    @Scheduled(cron = "0 0 18 * * *")
+    public void updateMidRainAndCloud() {
+        midWeatherApiService.updateMidLandFcst(dateNow);
+        midWeatherApiService.updateMidTa(dateNow);
     }
 }

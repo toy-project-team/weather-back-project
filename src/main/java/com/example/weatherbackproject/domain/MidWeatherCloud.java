@@ -47,4 +47,21 @@ public class MidWeatherCloud extends BaseTimeEntity {
         this.cloud7Am = cloud7Am;
         this.cloud7Pm = cloud7Pm;
     }
+
+    public void updateCloud(String cloud3Am, String cloud3Pm, String cloud4Am, String cloud4Pm, String cloud5Am, String cloud5Pm, String cloud6Am, String cloud6Pm, String cloud7Am, String cloud7Pm) {
+        this.cloud3Am = cloud3Am;
+        this.cloud3Pm = cloud3Pm;
+        this.cloud4Am = cloud4Am;
+        this.cloud4Pm = cloud4Pm;
+        this.cloud5Am = cloud5Am;
+        this.cloud5Pm = cloud5Pm;
+        this.cloud6Am = cloud6Am;
+        this.cloud6Pm = cloud6Pm;
+        this.cloud7Am = cloud7Am;
+        this.cloud7Pm = cloud7Pm;
+    }
+
+    public boolean equalsCodeAndDate(Long codeId, String date) {
+        return regionCodeId.equals(codeId) && inquiryDate.equals(date);
+    }
 }

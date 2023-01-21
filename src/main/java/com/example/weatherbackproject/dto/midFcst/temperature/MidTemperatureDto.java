@@ -13,13 +13,7 @@ public record MidTemperatureDto(
         @JsonProperty int taMin6,
         @JsonProperty int taMax6,
         @JsonProperty int taMin7,
-        @JsonProperty int taMax7,
-        @JsonProperty int taMin8,
-        @JsonProperty int taMax8,
-        @JsonProperty int taMin9,
-        @JsonProperty int taMax9,
-        @JsonProperty int taMin10,
-        @JsonProperty int taMax10
+        @JsonProperty int taMax7
 ) {
 
 

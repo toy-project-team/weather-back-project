@@ -47,4 +47,21 @@ public class MidWeatherRain extends BaseTimeEntity {
         this.rainFall7Am = rainFall7Am;
         this.rainFall7Pm = rainFall7Pm;
     }
+
+    public void updateRain(int rainFall3Am, int rainFall3Pm, int rainFall4Am, int rainFall4Pm, int rainFall5Am, int rainFall5Pm, int rainFall6Am, int rainFall6Pm, int rainFall7Am, int rainFall7Pm) {
+        this.rainFall3Am = rainFall3Am;
+        this.rainFall3Pm = rainFall3Pm;
+        this.rainFall4Am = rainFall4Am;
+        this.rainFall4Pm = rainFall4Pm;
+        this.rainFall5Am = rainFall5Am;
+        this.rainFall5Pm = rainFall5Pm;
+        this.rainFall6Am = rainFall6Am;
+        this.rainFall6Pm = rainFall6Pm;
+        this.rainFall7Am = rainFall7Am;
+        this.rainFall7Pm = rainFall7Pm;
+    }
+
+    public boolean equalsCodeAndDate(Long codeId, String date) {
+        return regionCodeId.equals(codeId) && inquiryDate.equals(date);
+    }
 }
