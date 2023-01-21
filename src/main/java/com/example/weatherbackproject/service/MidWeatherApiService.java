@@ -3,7 +3,10 @@ package com.example.weatherbackproject.service;
 import com.example.weatherbackproject.domain.*;
 import com.example.weatherbackproject.dto.midFcst.land.MidLandDto;
 import com.example.weatherbackproject.dto.midFcst.land.MidLandResultApiDto;
+import com.example.weatherbackproject.dto.midFcst.temperature.MidTemperatureDto;
+import com.example.weatherbackproject.dto.midFcst.temperature.MidTemperatureResultApiDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -17,21 +20,21 @@ import java.util.List;
 @Service
 public class MidWeatherApiService {
 
+    private final RestTemplate restTemplate;
     private final MidWeatherCloudRepository midWeatherCloudRepository;
     private final MidWeatherRainRepository midWeatherRainRepository;
-
-    private final RestTemplate restTemplate;
     private final MidWeatherUriBuilderService midWeatherUriBuilderService;
+    private final MidWeatherTemperatureRepository midWeatherTemperatureRepository;
     private final RegionCodeRepository regionCodeRepository;
 
-    public MidWeatherApiService(RestTemplate restTemplate, MidWeatherUriBuilderService midWeatherUriBuilderService, RegionCodeRepository regionCodeRepository,
-                                MidWeatherRainRepository midWeatherRainRepository,
-                                MidWeatherCloudRepository midWeatherCloudRepository) {
-        this.restTemplate = restTemplate;
+    public MidWeatherApiService(RestTemplateBuilder restTemplateBuilder, MidWeatherUriBuilderService midWeatherUriBuilderService, RegionCodeRepository regionCodeRepository,
+                                MidWeatherRainRepository midWeatherRainRepository, MidWeatherCloudRepository midWeatherCloudRepository, MidWeatherTemperatureRepository midWeatherTemperatureRepository) {
+        this.restTemplate = restTemplateBuilder.build();
         this.midWeatherUriBuilderService = midWeatherUriBuilderService;
         this.regionCodeRepository = regionCodeRepository;
         this.midWeatherRainRepository = midWeatherRainRepository;
         this.midWeatherCloudRepository = midWeatherCloudRepository;
+        this.midWeatherTemperatureRepository = midWeatherTemperatureRepository;
     }
 
     public void requestMidLandFcst(String date) {
@@ -55,6 +58,28 @@ public class MidWeatherApiService {
 
             midWeatherRainRepository.save(midWeatherRain);
             midWeatherCloudRepository.save(midWeatherCloud);
+        }
+    }
+
+    public void requestMidTa(String date) {
+        List<RegionCode> regionCodes = regionCodeRepository.findAll();
+
+        for (RegionCode code : regionCodes) {
+            URI uri = midWeatherUriBuilderService.buildUriByTa(code.getCode(), date);
+
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity httpEntity = new HttpEntity(headers);
+
+            MidTemperatureResultApiDto midTemperatureResultApiDto = restTemplate.exchange(uri, HttpMethod.GET, httpEntity, MidTemperatureResultApiDto.class).getBody();
+
+            if (midTemperatureResultApiDto.getCommonResponse().getBody().getItems().getItem().size() == 0) {
+                throw new RuntimeException("");
+            }
+
+            MidTemperatureDto midTemperatureDto = midTemperatureResultApiDto.getCommonResponse().getBody().getItems().getItem().get(0);
+            MidWeatherTemperature midWeatherTemperature = midTemperatureDto.toMidWeatherTemperature();
+
+            midWeatherTemperatureRepository.save(midWeatherTemperature);
         }
     }
 }
