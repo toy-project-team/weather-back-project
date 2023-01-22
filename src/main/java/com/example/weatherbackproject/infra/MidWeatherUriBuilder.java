@@ -1,16 +1,16 @@
-package com.example.weatherbackproject.service;
+package com.example.weatherbackproject.infra;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
 @Slf4j
-@Service
-public class MidWeatherUriBuilderService {
+@Component
+public class MidWeatherUriBuilder {
 
     @Value("${weather.rest.api.mid.key}")
     private String weatherRestApiMidKey;

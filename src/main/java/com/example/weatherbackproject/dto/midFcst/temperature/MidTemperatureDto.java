@@ -4,21 +4,23 @@ import com.example.weatherbackproject.domain.MidWeatherTemperature;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record MidTemperatureDto(
-        @JsonProperty int taMin3,
-        @JsonProperty int taMax3,
-        @JsonProperty int taMin4,
-        @JsonProperty int taMax4,
-        @JsonProperty int taMin5,
-        @JsonProperty int taMax5,
-        @JsonProperty int taMin6,
-        @JsonProperty int taMax6,
-        @JsonProperty int taMin7,
-        @JsonProperty int taMax7
+        @JsonProperty("taMin3") int taMin3,
+        @JsonProperty("taMax3") int taMax3,
+        @JsonProperty("taMin4") int taMin4,
+        @JsonProperty("taMax4") int taMax4,
+        @JsonProperty("taMin5") int taMin5,
+        @JsonProperty("taMax5") int taMax5,
+        @JsonProperty("taMin6") int taMin6,
+        @JsonProperty("taMax6") int taMax6,
+        @JsonProperty("taMin7") int taMin7,
+        @JsonProperty("taMax7") int taMax7
 ) {
 
 
-    public MidWeatherTemperature toMidWeatherTemperature() {
+    public MidWeatherTemperature toMidWeatherTemperature(Long codeId, String date) {
         return MidWeatherTemperature.builder()
+                .regionCodeId(codeId)
+                .inquiryDate(date)
                 .temperature3Min(taMin3)
                 .temperature3Max(taMax3)
                 .temperature3Min(taMin4)

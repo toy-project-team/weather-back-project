@@ -48,9 +48,7 @@ public class MidWeatherRain extends BaseTimeEntity {
         this.rainFall7Pm = rainFall7Pm;
     }
 
-    public void updateRain(int rainFall3Am, int rainFall3Pm, int rainFall4Am, int rainFall4Pm, int rainFall5Am, int rainFall5Pm, int rainFall6Am, int rainFall6Pm, int rainFall7Am, int rainFall7Pm) {
-        this.rainFall3Am = rainFall3Am;
-        this.rainFall3Pm = rainFall3Pm;
+    public void updateRain(int rainFall4Am, int rainFall4Pm, int rainFall5Am, int rainFall5Pm, int rainFall6Am, int rainFall6Pm, int rainFall7Am, int rainFall7Pm) {
         this.rainFall4Am = rainFall4Am;
         this.rainFall4Pm = rainFall4Pm;
         this.rainFall5Am = rainFall5Am;
