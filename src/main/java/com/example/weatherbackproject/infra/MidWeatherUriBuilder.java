@@ -12,15 +12,15 @@ import java.net.URISyntaxException;
 @Component
 public class MidWeatherUriBuilder {
 
-    @Value("${weather.rest.api.mid.key}")
-    private String weatherRestApiMidKey;
+    @Value("${weather.rest.api.key}")
+    private String weatherRestApiKey;
 
     private static final String MID_WEATHER_LAND_FCST_URL = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst";
     private static final String MID_WEATHER_TA_URL = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa";
 
     public URI buildUriByLandFcst(String regionCode, String date) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(MID_WEATHER_LAND_FCST_URL);
-        uriBuilder.queryParam("serviceKey", weatherRestApiMidKey);
+        uriBuilder.queryParam("serviceKey", weatherRestApiKey);
         uriBuilder.queryParam("dataType", "JSON");
         uriBuilder.queryParam("numOfRows", 10);
         uriBuilder.queryParam("pageNo", 1);
@@ -38,7 +38,7 @@ public class MidWeatherUriBuilder {
 
     public URI buildUriByTa(String regionCode, String date) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(MID_WEATHER_TA_URL);
-        uriBuilder.queryParam("serviceKey", weatherRestApiMidKey);
+        uriBuilder.queryParam("serviceKey", weatherRestApiKey);
         uriBuilder.queryParam("dataType", "JSON");
         uriBuilder.queryParam("numOfRows", 10);
         uriBuilder.queryParam("pageNo", 1);
