@@ -1,6 +1,5 @@
 package com.example.weatherbackproject.service;
 
-import com.example.weatherbackproject.domain.RegionCode;
 import com.example.weatherbackproject.domain.RegionCoordinate;
 import com.example.weatherbackproject.domain.RegionCoordinateRepository;
 import com.example.weatherbackproject.dto.shortFcst.vilage.ShortVilageDto;
