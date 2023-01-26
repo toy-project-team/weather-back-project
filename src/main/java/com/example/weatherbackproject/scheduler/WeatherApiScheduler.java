@@ -1,6 +1,6 @@
 package com.example.weatherbackproject.scheduler;
 
-import com.example.weatherbackproject.service.MidWeatherService;
+import com.example.weatherbackproject.service.MidWeatherCommandService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -14,21 +14,21 @@ public class WeatherApiScheduler {
 
     private static final String dateNow = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
 
-    private final MidWeatherService midWeatherService;
+    private final MidWeatherCommandService midWeatherCommandService;
 
-    public WeatherApiScheduler(MidWeatherService midWeatherService) {
-        this.midWeatherService = midWeatherService;
+    public WeatherApiScheduler(MidWeatherCommandService midWeatherCommandService) {
+        this.midWeatherCommandService = midWeatherCommandService;
     }
 
-    @Scheduled(cron = "0 0 6 * * *")
+    @Scheduled(cron = "0 10 6 * * *")
     public void createMidRainAndCloud() {
-        midWeatherService.createMidLandFcst(dateNow);
-        midWeatherService.createMidTa(dateNow);
+        midWeatherCommandService.createMidLandFcst(dateNow);
+        midWeatherCommandService.createMidTa(dateNow);
     }
 
-    @Scheduled(cron = "0 0 18 * * *")
+    @Scheduled(cron = "0 10 18 * * *")
     public void updateMidRainAndCloud() {
-        midWeatherService.updateMidLandFcst(dateNow);
-        midWeatherService.updateMidTa(dateNow);
+        midWeatherCommandService.updateMidLandFcst(dateNow);
+        midWeatherCommandService.updateMidTa(dateNow);
     }
 }
