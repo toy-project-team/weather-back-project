@@ -17,4 +17,14 @@ public class RegionCoordinate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String state;
+    private int latitude;
+    private int longitude;
+
+    public RegionCoordinate(String state, int latitude, int longitude) {
+        this.state = state;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }

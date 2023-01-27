@@ -21,6 +21,12 @@ public class MidWeatherCloud extends BaseTimeEntity {
 
     private Long regionCodeId;
     private String inquiryDate;
+    private String cloud0Am;
+    private String cloud0Pm;
+    private String cloud1Am;
+    private String cloud1Pm;
+    private String cloud2Am;
+    private String cloud2Pm;
     private String cloud3Am;
     private String cloud3Pm;
     private String cloud4Am;
@@ -33,9 +39,15 @@ public class MidWeatherCloud extends BaseTimeEntity {
     private String cloud7Pm;
 
     @Builder
-    public MidWeatherCloud(Long regionCodeId, String inquiryDate, String cloud3Am, String cloud3Pm, String cloud4Am, String cloud4Pm, String cloud5Am, String cloud5Pm, String cloud6Am, String cloud6Pm, String cloud7Am, String cloud7Pm) {
+    public MidWeatherCloud(Long regionCodeId, String inquiryDate, String cloud0Am, String cloud0Pm, String cloud1Am, String cloud1Pm, String cloud2Am, String cloud2Pm, String cloud3Am, String cloud3Pm, String cloud4Am, String cloud4Pm, String cloud5Am, String cloud5Pm, String cloud6Am, String cloud6Pm, String cloud7Am, String cloud7Pm) {
         this.regionCodeId = regionCodeId;
         this.inquiryDate = inquiryDate;
+        this.cloud0Am = cloud0Am;
+        this.cloud0Pm = cloud0Pm;
+        this.cloud1Am = cloud1Am;
+        this.cloud1Pm = cloud1Pm;
+        this.cloud2Am = cloud2Am;
+        this.cloud2Pm = cloud2Pm;
         this.cloud3Am = cloud3Am;
         this.cloud3Pm = cloud3Pm;
         this.cloud4Am = cloud4Am;

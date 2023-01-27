@@ -21,6 +21,12 @@ public class MidWeatherRain extends BaseTimeEntity {
 
     private Long regionCodeId;
     private String inquiryDate;
+    private int rainFall0Am;
+    private int rainFall0Pm;
+    private int rainFall1Am;
+    private int rainFall1Pm;
+    private int rainFall2Am;
+    private int rainFall2Pm;
     private int rainFall3Am;
     private int rainFall3Pm;
     private int rainFall4Am;
@@ -33,9 +39,15 @@ public class MidWeatherRain extends BaseTimeEntity {
     private int rainFall7Pm;
 
     @Builder
-    public MidWeatherRain(Long regionCodeId, String inquiryDate, int rainFall3Am, int rainFall3Pm, int rainFall4Am, int rainFall4Pm, int rainFall5Am, int rainFall5Pm, int rainFall6Am, int rainFall6Pm, int rainFall7Am, int rainFall7Pm) {
+    public MidWeatherRain(Long regionCodeId, String inquiryDate, int rainFall0Am, int rainFall0Pm, int rainFall1Am, int rainFall1Pm, int rainFall2Am, int rainFall2Pm, int rainFall3Am, int rainFall3Pm, int rainFall4Am, int rainFall4Pm, int rainFall5Am, int rainFall5Pm, int rainFall6Am, int rainFall6Pm, int rainFall7Am, int rainFall7Pm) {
         this.regionCodeId = regionCodeId;
         this.inquiryDate = inquiryDate;
+        this.rainFall0Am = rainFall0Am;
+        this.rainFall0Pm = rainFall0Pm;
+        this.rainFall1Am = rainFall1Am;
+        this.rainFall1Pm = rainFall1Pm;
+        this.rainFall2Am = rainFall2Am;
+        this.rainFall2Pm = rainFall2Pm;
         this.rainFall3Am = rainFall3Am;
         this.rainFall3Pm = rainFall3Pm;
         this.rainFall4Am = rainFall4Am;

@@ -21,6 +21,12 @@ public class MidWeatherTemperature extends BaseTimeEntity {
 
     private Long regionCodeId;
     private String inquiryDate;
+    private int temperature0Min;
+    private int temperature0Max;
+    private int temperature1Min;
+    private int temperature1Max;
+    private int temperature2Min;
+    private int temperature2Max;
     private int temperature3Min;
     private int temperature3Max;
     private int temperature4Min;
@@ -33,9 +39,15 @@ public class MidWeatherTemperature extends BaseTimeEntity {
     private int temperature7Max;
 
     @Builder
-    public MidWeatherTemperature(Long regionCodeId, String inquiryDate, int temperature3Min, int temperature3Max, int temperature4Min, int temperature4Max, int temperature5Min, int temperature5Max, int temperature6Min, int temperature6Max, int temperature7Min, int temperature7Max) {
+    public MidWeatherTemperature(Long regionCodeId, String inquiryDate, int temperature0Min, int temperature0Max, int temperature1Min, int temperature1Max, int temperature2Min, int temperature2Max, int temperature3Min, int temperature3Max, int temperature4Min, int temperature4Max, int temperature5Min, int temperature5Max, int temperature6Min, int temperature6Max, int temperature7Min, int temperature7Max) {
         this.regionCodeId = regionCodeId;
         this.inquiryDate = inquiryDate;
+        this.temperature0Min = temperature0Min;
+        this.temperature0Max = temperature0Max;
+        this.temperature1Min = temperature1Min;
+        this.temperature1Max = temperature1Max;
+        this.temperature2Min = temperature2Min;
+        this.temperature2Max = temperature2Max;
         this.temperature3Min = temperature3Min;
         this.temperature3Max = temperature3Max;
         this.temperature4Min = temperature4Min;

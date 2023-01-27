@@ -20,15 +20,21 @@ public class WeatherApiScheduler {
         this.midWeatherCommandService = midWeatherCommandService;
     }
 
-    @Scheduled(cron = "0 10 6 * * *")
+    @Scheduled(cron = "1 0 0 * * *")
     public void createMidRainAndCloud() {
-        midWeatherCommandService.createMidLandFcst(dateNow);
-        midWeatherCommandService.createMidTa(dateNow);
+        midWeatherCommandService.createMidLandFcst();
+        midWeatherCommandService.createMidTa();
+    }
+
+    @Scheduled(cron = "0 10 6 * * *")
+    public void updateSixMidRainAndCloud() {
+        midWeatherCommandService.updateSixMidLandFcst(dateNow);
+        midWeatherCommandService.updateSixMidTa(dateNow);
     }
 
     @Scheduled(cron = "0 10 18 * * *")
-    public void updateMidRainAndCloud() {
-        midWeatherCommandService.updateMidLandFcst(dateNow);
-        midWeatherCommandService.updateMidTa(dateNow);
+    public void updateEighteenMidRainAndCloud() {
+        midWeatherCommandService.updateEighteenMidLandFcst(dateNow);
+        midWeatherCommandService.updateEighteenMidTa(dateNow);
     }
 }
