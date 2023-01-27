@@ -127,21 +127,13 @@ public class MidWeatherCommandService {
                 .build();
     }
 
-    public void updateSixMidLandFcst(String date) {
-        updateMidLandFcst(date, date + "0600");
-    }
-
-    public void updateEighteenMidLandFcst(String date) {
-        updateMidLandFcst(date, date + "1800");
-    }
-
-    public void updateMidLandFcst(String date, String dateTime) {
+    public void updateMidLandFcst(String date, String time) {
         List<RegionCode> regionCodes = regionCodeRepository.findAllByType(MidType.LAND);
         List<MidWeatherRain> midWeatherRains = midWeatherRainRepository.findAllByInquiryDate(date);
         List<MidWeatherCloud> midWeatherClouds = midWeatherCloudRepository.findAllByInquiryDate(date);
 
         for (RegionCode code : regionCodes) {
-            URI uri = midWeatherUriBuilderService.buildUriByLandFcst(code.getCode(), dateTime);
+            URI uri = midWeatherUriBuilderService.buildUriByLandFcst(code.getCode(), date + time);
 
             MidLandDto midLandDto = midWeatherApiService.requestMidLandFcst(uri);
 
@@ -161,20 +153,12 @@ public class MidWeatherCommandService {
         }
     }
 
-    public void updateSixMidTa(String date) {
-        updateMidTa(date, date + "0600");
-    }
-
-    public void updateEighteenMidTa(String date) {
-        updateMidTa(date, date + "1800");
-    }
-
-    public void updateMidTa(String date, String dateTime) {
+    public void updateMidTa(String date, String time) {
         List<RegionCode> regionCodes = regionCodeRepository.findAllByType(MidType.TEMP);
         List<MidWeatherTemperature> midWeatherTemperatures = midWeatherTemperatureRepository.findAllByInquiryDate(date);
 
         for (RegionCode code : regionCodes) {
-            URI uri = midWeatherUriBuilderService.buildUriByTa(code.getCode(), dateTime);
+            URI uri = midWeatherUriBuilderService.buildUriByTa(code.getCode(), date + time);
 
             MidTemperatureDto midTemperatureDto = midWeatherApiService.requestMidTa(uri);
 

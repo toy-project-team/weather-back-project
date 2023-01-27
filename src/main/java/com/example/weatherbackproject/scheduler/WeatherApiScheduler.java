@@ -28,13 +28,13 @@ public class WeatherApiScheduler {
 
     @Scheduled(cron = "0 10 6 * * *")
     public void updateSixMidRainAndCloud() {
-        midWeatherCommandService.updateSixMidLandFcst(dateNow);
-        midWeatherCommandService.updateSixMidTa(dateNow);
+        midWeatherCommandService.updateMidLandFcst(dateNow, "0600");
+        midWeatherCommandService.updateMidTa(dateNow, "0600");
     }
 
     @Scheduled(cron = "0 10 18 * * *")
     public void updateEighteenMidRainAndCloud() {
-        midWeatherCommandService.updateEighteenMidLandFcst(dateNow);
-        midWeatherCommandService.updateEighteenMidTa(dateNow);
+        midWeatherCommandService.updateMidLandFcst(dateNow, "1800");
+        midWeatherCommandService.updateMidTa(dateNow, "1800");
     }
 }
