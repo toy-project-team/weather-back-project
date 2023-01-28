@@ -20,7 +20,7 @@ public class MidWeatherController {
     }
 
     @GetMapping("/api/mid")
-    public List<MidWeatherResponse> midWeatherList(@RequestParam String state, double latitude, double longitude) {
+    public List<MidWeatherResponse> midWeatherList(@RequestParam String state, @RequestParam double latitude, @RequestParam double longitude) {
         return midWeatherService.midWeatherList(state, latitude, longitude);
     }
 

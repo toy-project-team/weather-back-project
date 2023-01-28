@@ -1,0 +1,13 @@
+= Weather Server Application API Document
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+== 주 날씨 API
+
+== 주 날씨 리스트 조회
+
+operation::mid/list[snippets='http-request,request-parameters,http-response,response-fields']
