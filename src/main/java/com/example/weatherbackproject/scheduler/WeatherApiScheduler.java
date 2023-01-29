@@ -2,6 +2,7 @@ package com.example.weatherbackproject.scheduler;
 
 import com.example.weatherbackproject.service.MidWeatherCommandService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -20,19 +21,22 @@ public class WeatherApiScheduler {
         this.midWeatherCommandService = midWeatherCommandService;
     }
 
-    @Scheduled(cron = "1 0 0 * * *")
+    @Async("schedulerExecutor")
+    @Scheduled(cron = "1 0 0 * * *", zone="Asia/Seoul")
     public void createMidRainAndCloud() {
         midWeatherCommandService.createMidLandFcst();
         midWeatherCommandService.createMidTa();
     }
 
-    @Scheduled(cron = "0 10 6 * * *")
+    @Async("schedulerExecutor")
+    @Scheduled(cron = "0 10 6 * * *", zone="Asia/Seoul")
     public void updateSixMidRainAndCloud() {
         midWeatherCommandService.updateMidLandFcst(dateNow, "0600");
         midWeatherCommandService.updateMidTa(dateNow, "0600");
     }
 
-    @Scheduled(cron = "0 10 18 * * *")
+    @Async("schedulerExecutor")
+    @Scheduled(cron = "0 10 18 * * *", zone="Asia/Seoul")
     public void updateEighteenMidRainAndCloud() {
         midWeatherCommandService.updateMidLandFcst(dateNow, "1800");
         midWeatherCommandService.updateMidTa(dateNow, "1800");
