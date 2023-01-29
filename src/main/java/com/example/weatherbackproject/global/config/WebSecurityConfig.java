@@ -24,7 +24,7 @@ public class WebSecurityConfig {
                 .httpBasic().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/h2-console/**").permitAll()
-                .antMatchers("/test").permitAll();
+                .antMatchers("/api/**").permitAll();
 
         return http.build();
     }
