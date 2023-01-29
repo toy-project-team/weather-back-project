@@ -37,9 +37,10 @@ public class MidWeatherCloud extends BaseTimeEntity {
     private String cloud6Pm;
     private String cloud7Am;
     private String cloud7Pm;
+    private String cloud8;
 
     @Builder
-    public MidWeatherCloud(Long regionCodeId, String inquiryDate, String cloud0Am, String cloud0Pm, String cloud1Am, String cloud1Pm, String cloud2Am, String cloud2Pm, String cloud3Am, String cloud3Pm, String cloud4Am, String cloud4Pm, String cloud5Am, String cloud5Pm, String cloud6Am, String cloud6Pm, String cloud7Am, String cloud7Pm) {
+    public MidWeatherCloud(Long regionCodeId, String inquiryDate, String cloud0Am, String cloud0Pm, String cloud1Am, String cloud1Pm, String cloud2Am, String cloud2Pm, String cloud3Am, String cloud3Pm, String cloud4Am, String cloud4Pm, String cloud5Am, String cloud5Pm, String cloud6Am, String cloud6Pm, String cloud7Am, String cloud7Pm, String cloud8) {
         this.regionCodeId = regionCodeId;
         this.inquiryDate = inquiryDate;
         this.cloud0Am = cloud0Am;
@@ -58,9 +59,10 @@ public class MidWeatherCloud extends BaseTimeEntity {
         this.cloud6Pm = cloud6Pm;
         this.cloud7Am = cloud7Am;
         this.cloud7Pm = cloud7Pm;
+        this.cloud8 = cloud8;
     }
 
-    public void updateCloud(String cloud3Am, String cloud3Pm, String cloud4Am, String cloud4Pm, String cloud5Am, String cloud5Pm, String cloud6Am, String cloud6Pm, String cloud7Am, String cloud7Pm) {
+    public void updateCloud(String cloud3Am, String cloud3Pm, String cloud4Am, String cloud4Pm, String cloud5Am, String cloud5Pm, String cloud6Am, String cloud6Pm, String cloud7Am, String cloud7Pm, String cloud8) {
         this.cloud3Am = cloud3Am;
         this.cloud3Pm = cloud3Pm;
         this.cloud4Am = cloud4Am;
@@ -71,6 +73,7 @@ public class MidWeatherCloud extends BaseTimeEntity {
         this.cloud6Pm = cloud6Pm;
         this.cloud7Am = cloud7Am;
         this.cloud7Pm = cloud7Pm;
+        this.cloud8 = cloud8;
     }
 
     public boolean equalsCodeAndDate(Long codeId, String date) {

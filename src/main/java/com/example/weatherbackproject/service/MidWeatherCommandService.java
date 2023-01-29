@@ -70,6 +70,8 @@ public class MidWeatherCommandService {
                 .rainFall5Pm(midWeatherRain.getRainFall6Pm())
                 .rainFall6Am(midWeatherRain.getRainFall7Am())
                 .rainFall6Pm(midWeatherRain.getRainFall7Pm())
+                .rainFall7Am(midWeatherRain.getRainFall8())
+                .rainFall7Pm(midWeatherRain.getRainFall8())
                 .build();
     }
 
@@ -91,6 +93,8 @@ public class MidWeatherCommandService {
                 .cloud5Pm(midWeatherCloud.getCloud6Pm())
                 .cloud6Am(midWeatherCloud.getCloud7Am())
                 .cloud6Pm(midWeatherCloud.getCloud7Pm())
+                .cloud7Am(midWeatherCloud.getCloud8())
+                .cloud7Pm(midWeatherCloud.getCloud8())
                 .build();
     }
 
@@ -124,50 +128,38 @@ public class MidWeatherCommandService {
                 .temperature5Max(midWeatherTemperature.getTemperature6Max())
                 .temperature6Min(midWeatherTemperature.getTemperature7Min())
                 .temperature6Max(midWeatherTemperature.getTemperature7Max())
+                .temperature7Min(midWeatherTemperature.getTemperature8Min())
+                .temperature7Max(midWeatherTemperature.getTemperature8Max())
                 .build();
     }
 
     public void updateMidLandFcst(String date, String time) {
         List<RegionCode> regionCodes = regionCodeRepository.findAllByType(MidType.LAND);
-        List<MidWeatherRain> midWeatherRains = midWeatherRainRepository.findAllByInquiryDate(date);
-        List<MidWeatherCloud> midWeatherClouds = midWeatherCloudRepository.findAllByInquiryDate(date);
+        MidWeatherRains midWeatherRains = new MidWeatherRains(midWeatherRainRepository.findAllByInquiryDate(date));
+        MidWeatherClouds midWeatherClouds = new MidWeatherClouds(midWeatherCloudRepository.findAllByInquiryDate(date));
 
         for (RegionCode code : regionCodes) {
             URI uri = midWeatherUriBuilderService.buildUriByLandFcst(code.getCode(), date + time);
-
             MidLandDto midLandDto = midWeatherApiService.requestMidLandFcst(uri);
 
-            MidWeatherRain midWeatherRain = midWeatherRains.stream()
-                    .filter(rain -> rain.equalsCodeAndDate(code.getId(), date))
-                    .findFirst()
-                    .orElseThrow();
+            MidWeatherRain midWeatherRain = midWeatherRains.findMidWeatherRain(code.getId(), date);
+            midWeatherRain.updateRain(midLandDto.rnSt4Am(), midLandDto.rnSt4Pm(), midLandDto.rnSt5Am(), midLandDto.rnSt5Pm(), midLandDto.rnSt6Am(), midLandDto.rnSt6Pm(), midLandDto.rnSt7Am(), midLandDto.rnSt7Pm(), midLandDto.rnSt8());
 
-            midWeatherRain.updateRain(midLandDto.rnSt4Am(), midLandDto.rnSt4Pm(), midLandDto.rnSt5Am(), midLandDto.rnSt5Pm(), midLandDto.rnSt6Am(), midLandDto.rnSt6Pm(), midLandDto.rnSt7Am(), midLandDto.rnSt7Pm());
-
-            MidWeatherCloud midWeatherCloud = midWeatherClouds.stream()
-                    .filter(cloud -> cloud.equalsCodeAndDate(code.getId(), date))
-                    .findFirst()
-                    .orElseThrow();
-
-            midWeatherCloud.updateCloud(midLandDto.wf3Am(), midLandDto.wf3Pm(), midLandDto.wf4Am(), midLandDto.wf4Pm(), midLandDto.wf5Am(), midLandDto.wf5Pm(), midLandDto.wf6Am(), midLandDto.wf6Pm(), midLandDto.wf7Am(), midLandDto.wf7Pm());
+            MidWeatherCloud midWeatherCloud = midWeatherClouds.findMidWeatherCloud(code.getId(), date);
+            midWeatherCloud.updateCloud(midLandDto.wf3Am(), midLandDto.wf3Pm(), midLandDto.wf4Am(), midLandDto.wf4Pm(), midLandDto.wf5Am(), midLandDto.wf5Pm(), midLandDto.wf6Am(), midLandDto.wf6Pm(), midLandDto.wf7Am(), midLandDto.wf7Pm(), midLandDto.wf8());
         }
     }
 
     public void updateMidTa(String date, String time) {
         List<RegionCode> regionCodes = regionCodeRepository.findAllByType(MidType.TEMP);
-        List<MidWeatherTemperature> midWeatherTemperatures = midWeatherTemperatureRepository.findAllByInquiryDate(date);
+        MidWeatherTemperatures midWeatherTemperatures = new MidWeatherTemperatures(midWeatherTemperatureRepository.findAllByInquiryDate(date));
 
         for (RegionCode code : regionCodes) {
             URI uri = midWeatherUriBuilderService.buildUriByTa(code.getCode(), date + time);
-
             MidTemperatureDto midTemperatureDto = midWeatherApiService.requestMidTa(uri);
 
-            MidWeatherTemperature midWeatherTemperature = midWeatherTemperatures.stream()
-                    .filter(tem -> tem.equalsCodeAndDate(code.getId(), date))
-                    .findFirst()
-                    .orElseThrow();
-
-            midWeatherTemperature.updateTemperature(midTemperatureDto.taMin4(), midTemperatureDto.taMax4(), midTemperatureDto.taMin5(), midTemperatureDto.taMax5(), midTemperatureDto.taMin6(), midTemperatureDto.taMax6(), midTemperatureDto.taMin7(), midTemperatureDto.taMax7());
+            MidWeatherTemperature midWeatherTemperature = midWeatherTemperatures.findMidWeatherTemperatures(code.getId(), date);
+            midWeatherTemperature.updateTemperature(midTemperatureDto.taMin4(), midTemperatureDto.taMax4(), midTemperatureDto.taMin5(), midTemperatureDto.taMax5(), midTemperatureDto.taMin6(), midTemperatureDto.taMax6(), midTemperatureDto.taMin7(), midTemperatureDto.taMax7(), midTemperatureDto.taMin8(), midTemperatureDto.taMax8());
         }
     }
 }

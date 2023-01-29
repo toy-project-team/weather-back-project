@@ -37,9 +37,10 @@ public class MidWeatherRain extends BaseTimeEntity {
     private int rainFall6Pm;
     private int rainFall7Am;
     private int rainFall7Pm;
+    private int rainFall8;
 
     @Builder
-    public MidWeatherRain(Long regionCodeId, String inquiryDate, int rainFall0Am, int rainFall0Pm, int rainFall1Am, int rainFall1Pm, int rainFall2Am, int rainFall2Pm, int rainFall3Am, int rainFall3Pm, int rainFall4Am, int rainFall4Pm, int rainFall5Am, int rainFall5Pm, int rainFall6Am, int rainFall6Pm, int rainFall7Am, int rainFall7Pm) {
+    public MidWeatherRain(Long regionCodeId, String inquiryDate, int rainFall0Am, int rainFall0Pm, int rainFall1Am, int rainFall1Pm, int rainFall2Am, int rainFall2Pm, int rainFall3Am, int rainFall3Pm, int rainFall4Am, int rainFall4Pm, int rainFall5Am, int rainFall5Pm, int rainFall6Am, int rainFall6Pm, int rainFall7Am, int rainFall7Pm, int rainFall8) {
         this.regionCodeId = regionCodeId;
         this.inquiryDate = inquiryDate;
         this.rainFall0Am = rainFall0Am;
@@ -58,9 +59,10 @@ public class MidWeatherRain extends BaseTimeEntity {
         this.rainFall6Pm = rainFall6Pm;
         this.rainFall7Am = rainFall7Am;
         this.rainFall7Pm = rainFall7Pm;
+        this.rainFall8 = rainFall8;
     }
 
-    public void updateRain(int rainFall4Am, int rainFall4Pm, int rainFall5Am, int rainFall5Pm, int rainFall6Am, int rainFall6Pm, int rainFall7Am, int rainFall7Pm) {
+    public void updateRain(int rainFall4Am, int rainFall4Pm, int rainFall5Am, int rainFall5Pm, int rainFall6Am, int rainFall6Pm, int rainFall7Am, int rainFall7Pm, int rainFall8) {
         this.rainFall4Am = rainFall4Am;
         this.rainFall4Pm = rainFall4Pm;
         this.rainFall5Am = rainFall5Am;
@@ -69,6 +71,7 @@ public class MidWeatherRain extends BaseTimeEntity {
         this.rainFall6Pm = rainFall6Pm;
         this.rainFall7Am = rainFall7Am;
         this.rainFall7Pm = rainFall7Pm;
+        this.rainFall8 = rainFall8;
     }
 
     public boolean equalsCodeAndDate(Long codeId, String date) {

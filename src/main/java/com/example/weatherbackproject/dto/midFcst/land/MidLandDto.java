@@ -1,7 +1,5 @@
 package com.example.weatherbackproject.dto.midFcst.land;
 
-import com.example.weatherbackproject.domain.MidWeatherCloud;
-import com.example.weatherbackproject.domain.MidWeatherRain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record MidLandDto(
@@ -15,6 +13,7 @@ public record MidLandDto(
         @JsonProperty("rnSt6Pm") int rnSt6Pm,
         @JsonProperty("rnSt7Am") int rnSt7Am,
         @JsonProperty("rnSt7Pm") int rnSt7Pm,
+        @JsonProperty("rnSt8") int rnSt8,
         @JsonProperty("wf3Am") String wf3Am,
         @JsonProperty("wf3Pm") String wf3Pm,
         @JsonProperty("wf4Am") String wf4Am,
@@ -24,40 +23,7 @@ public record MidLandDto(
         @JsonProperty("wf6Am") String wf6Am,
         @JsonProperty("wf6Pm") String wf6Pm,
         @JsonProperty("wf7Am") String wf7Am,
-        @JsonProperty("wf7Pm") String wf7Pm
+        @JsonProperty("wf7Pm") String wf7Pm,
+        @JsonProperty("wf8") String wf8
 ) {
-
-    public MidWeatherRain toMidWeatherRain(Long codeId, String date) {
-        return MidWeatherRain.builder()
-                .regionCodeId(codeId)
-                .inquiryDate(date)
-                .rainFall3Am(rnSt3Am)
-                .rainFall3Pm(rnSt3Pm)
-                .rainFall4Am(rnSt4Am)
-                .rainFall4Pm(rnSt4Pm)
-                .rainFall5Am(rnSt5Am)
-                .rainFall5Pm(rnSt5Pm)
-                .rainFall6Am(rnSt6Am)
-                .rainFall6Pm(rnSt6Pm)
-                .rainFall7Am(rnSt7Am)
-                .rainFall7Pm(rnSt7Pm)
-                .build();
-    }
-
-    public MidWeatherCloud toMidWeatherCloud(Long codeId, String date) {
-        return MidWeatherCloud.builder()
-                .regionCodeId(codeId)
-                .inquiryDate(date)
-                .cloud3Am(wf3Am)
-                .cloud3Pm(wf3Pm)
-                .cloud4Am(wf4Am)
-                .cloud4Pm(wf4Pm)
-                .cloud5Am(wf5Am)
-                .cloud5Pm(wf5Pm)
-                .cloud6Am(wf6Am)
-                .cloud6Pm(wf6Pm)
-                .cloud7Am(wf7Am)
-                .cloud7Pm(wf7Pm)
-                .build();
-    }
 }

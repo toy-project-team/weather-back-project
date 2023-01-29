@@ -37,9 +37,11 @@ public class MidWeatherTemperature extends BaseTimeEntity {
     private int temperature6Max;
     private int temperature7Min;
     private int temperature7Max;
+    private int temperature8Min;
+    private int temperature8Max;
 
     @Builder
-    public MidWeatherTemperature(Long regionCodeId, String inquiryDate, int temperature0Min, int temperature0Max, int temperature1Min, int temperature1Max, int temperature2Min, int temperature2Max, int temperature3Min, int temperature3Max, int temperature4Min, int temperature4Max, int temperature5Min, int temperature5Max, int temperature6Min, int temperature6Max, int temperature7Min, int temperature7Max) {
+    public MidWeatherTemperature(Long regionCodeId, String inquiryDate, int temperature0Min, int temperature0Max, int temperature1Min, int temperature1Max, int temperature2Min, int temperature2Max, int temperature3Min, int temperature3Max, int temperature4Min, int temperature4Max, int temperature5Min, int temperature5Max, int temperature6Min, int temperature6Max, int temperature7Min, int temperature7Max, int temperature8Min, int temperature8Max) {
         this.regionCodeId = regionCodeId;
         this.inquiryDate = inquiryDate;
         this.temperature0Min = temperature0Min;
@@ -58,9 +60,11 @@ public class MidWeatherTemperature extends BaseTimeEntity {
         this.temperature6Max = temperature6Max;
         this.temperature7Min = temperature7Min;
         this.temperature7Max = temperature7Max;
+        this.temperature8Min = temperature8Min;
+        this.temperature8Max = temperature8Max;
     }
 
-    public void updateTemperature(int temperature4Min, int temperature4Max, int temperature5Min, int temperature5Max, int temperature6Min, int temperature6Max, int temperature7Min, int temperature7Max) {
+    public void updateTemperature(int temperature4Min, int temperature4Max, int temperature5Min, int temperature5Max, int temperature6Min, int temperature6Max, int temperature7Min, int temperature7Max, int temperature8Min, int temperature8Max) {
         this.temperature4Min = temperature4Min;
         this.temperature4Max = temperature4Max;
         this.temperature5Min = temperature5Min;
@@ -69,6 +73,8 @@ public class MidWeatherTemperature extends BaseTimeEntity {
         this.temperature6Max = temperature6Max;
         this.temperature7Min = temperature7Min;
         this.temperature7Max = temperature7Max;
+        this.temperature8Min = temperature8Min;
+        this.temperature8Max = temperature8Max;
     }
 
     public boolean equalsCodeAndDate(Long codeId, String date) {
