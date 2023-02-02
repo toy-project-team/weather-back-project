@@ -21,10 +21,14 @@ public class RegionCoordinate {
     private String state;
     private int latitude;
     private int longitude;
+    private int nx;
+    private int ny;
 
-    public RegionCoordinate(String state, int latitude, int longitude) {
+    public RegionCoordinate(String state, int latitude, int longitude, int nx, int ny) {
         this.state = state;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.nx = nx;
+        this.ny = ny;
     }
 }
