@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -20,8 +21,7 @@ public class ShortWeather extends BaseTimeEntity {
     private Long id;
 
     private Long regionCodeId;
-    private String inquiryDate;
-    private String baseTime;
+    private LocalDateTime inquiryDate;
     private int rainProbability;    // 강수 확률
     private String precipitationForm;  // 강수 형태
     private String rainPrecipitation; // 강수량
@@ -31,10 +31,19 @@ public class ShortWeather extends BaseTimeEntity {
     private int humidity;          // 습도
 
     @Builder
-    public ShortWeather(Long regionCodeId, String inquiryDate, String baseTime, int rainProbability, String precipitationForm, String rainPrecipitation, String snowAmount, String cloudState, int hourTemperature, int humidity) {
+    public ShortWeather(Long regionCodeId, LocalDateTime inquiryDate, int rainProbability, String precipitationForm, String rainPrecipitation, String snowAmount, String cloudState, int hourTemperature, int humidity) {
         this.regionCodeId = regionCodeId;
         this.inquiryDate = inquiryDate;
-        this.baseTime = baseTime;
+        this.rainProbability = rainProbability;
+        this.precipitationForm = precipitationForm;
+        this.rainPrecipitation = rainPrecipitation;
+        this.snowAmount = snowAmount;
+        this.cloudState = cloudState;
+        this.hourTemperature = hourTemperature;
+        this.humidity = humidity;
+    }
+
+    public void updateWeather(int rainProbability, String precipitationForm, String rainPrecipitation, String snowAmount, String cloudState, int hourTemperature, int humidity) {
         this.rainProbability = rainProbability;
         this.precipitationForm = precipitationForm;
         this.rainPrecipitation = rainPrecipitation;
@@ -49,7 +58,6 @@ public class ShortWeather extends BaseTimeEntity {
         return "ShortWeather{" +
                 ", regionCodeId=" + regionCodeId +
                 ", inquiryDate='" + inquiryDate + '\'' +
-                ", baseTime='" + baseTime + '\'' +
                 ", rainProbability=" + rainProbability +
                 ", precipitationForm='" + precipitationForm + '\'' +
                 ", rainPrecipitation=" + rainPrecipitation +

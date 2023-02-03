@@ -18,13 +18,15 @@ public class RegionCoordinate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String city;
     private String state;
     private int latitude;
     private int longitude;
     private int nx;
     private int ny;
 
-    public RegionCoordinate(String state, int latitude, int longitude, int nx, int ny) {
+    public RegionCoordinate(String city, String state, int latitude, int longitude, int nx, int ny) {
+        this.city = city;
         this.state = state;
         this.latitude = latitude;
         this.longitude = longitude;
