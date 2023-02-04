@@ -11,3 +11,9 @@
 == 주 날씨 리스트 조회
 
 operation::mid/list[snippets='http-request,request-parameters,http-response,response-fields']
+
+== 시간별 날씨 API
+
+== 시간별 날씨 리스트 조회
+
+operation::short/list[snippets='http-request,request-parameters,http-response,response-fields']

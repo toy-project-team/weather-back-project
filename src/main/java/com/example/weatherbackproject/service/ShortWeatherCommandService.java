@@ -1,9 +1,6 @@
 package com.example.weatherbackproject.service;
 
-import com.example.weatherbackproject.domain.RegionCoordinate;
-import com.example.weatherbackproject.domain.RegionCoordinateRepository;
-import com.example.weatherbackproject.domain.ShortWeather;
-import com.example.weatherbackproject.domain.ShortWeatherRepository;
+import com.example.weatherbackproject.domain.*;
 import com.example.weatherbackproject.dto.shortFcst.vilage.ShortVilageDto;
 import com.example.weatherbackproject.infra.ShortWeatherApiClient;
 import com.example.weatherbackproject.infra.ShortWeatherUriBuilder;
@@ -98,7 +95,7 @@ public class ShortWeatherCommandService {
                 }
 
                 if (shortVilageDto.category().equals("PTY")) {
-                    precipitationForm = shortVilageDto.fcstValue();
+                    precipitationForm = PrecipitationFormCode.searchNum(Integer.parseInt(shortVilageDto.fcstValue()));
                 }
 
                 if (shortVilageDto.category().equals("PCP")) {
@@ -110,7 +107,7 @@ public class ShortWeatherCommandService {
                 }
 
                 if (shortVilageDto.category().equals("SKY")) {
-                    cloudState = shortVilageDto.fcstValue();
+                    cloudState = SkyCode.searchNum(Integer.parseInt(shortVilageDto.fcstValue()));
                 }
 
                 if (shortVilageDto.category().equals("TMP")) {
