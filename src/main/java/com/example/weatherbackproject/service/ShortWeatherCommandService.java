@@ -37,7 +37,7 @@ public class ShortWeatherCommandService {
 
         for (RegionCoordinate regionCoordinate : regionCoordinates) {
             LocalDateTime now = LocalDateTime.now();
-            List<ShortWeather> shortWeathers = shortWeatherRepository.findShortWeatherCurrentTime(now, regionCoordinate.getId());
+            List<ShortWeather> shortWeathers = shortWeatherRepository.findByRegionCodeIdAndInquiryDateGreaterThanEqual(regionCoordinate.getId(), now);
             List<LocalDateTime> baseDates = Collections.emptyList();
 
             if (!CollectionUtils.isEmpty(shortWeathers)) {
@@ -73,7 +73,7 @@ public class ShortWeatherCommandService {
                     } else {
                         shortWeatherRepository.save(
                                 ShortWeather.builder()
-                                        .regionCodeId(1L)
+                                        .regionCodeId(regionCoordinate.getId())
                                         .inquiryDate(inquiryDate)
                                         .rainProbability(rainProbability)
                                         .precipitationForm(precipitationForm)
