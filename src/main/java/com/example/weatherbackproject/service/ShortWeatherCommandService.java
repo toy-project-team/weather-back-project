@@ -34,7 +34,6 @@ public class ShortWeatherCommandService {
 
     public void createShortVilageFcst(String date, String baseTime) {
         List<RegionCoordinate> regionCoordinates = regionCoordinateRepository.findAll();
-
         for (RegionCoordinate regionCoordinate : regionCoordinates) {
             LocalDateTime now = LocalDateTime.now();
             List<ShortWeather> shortWeathers = shortWeatherRepository.findByRegionCodeIdAndInquiryDateGreaterThanEqual(regionCoordinate.getId(), now);
@@ -60,7 +59,7 @@ public class ShortWeatherCommandService {
 
             // 강수확률 POP, 강수형태 PTY, 강수량 PCP, 적설량 SNO, 하늘상태 SKY, 1시간 기온 TMP, 습도 REH
             for (ShortVilageDto shortVilageDto : shortVilageDtos) {
-                if (!standDate.equals(shortVilageDto.fcstDate()) || !standTime.equals(shortVilageDto.fcstTime())) {
+                if (!standTime.equals(shortVilageDto.fcstTime())) {
                     LocalDateTime inquiryDate = LocalDateTime.of(Integer.parseInt(standDate.substring(0, 4)), Integer.parseInt(standDate.substring(4, 6)), Integer.parseInt(standDate.substring(6)), Integer.parseInt(standTime.substring(0, 2)), 0);
 
                     if (baseDates.contains(inquiryDate)) {

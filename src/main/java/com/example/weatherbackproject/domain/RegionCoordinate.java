@@ -20,12 +20,12 @@ public class RegionCoordinate {
 
     private String city;
     private String state;
-    private int latitude;
-    private int longitude;
+    private double latitude;
+    private double longitude;
     private int nx;
     private int ny;
 
-    public RegionCoordinate(String city, String state, int latitude, int longitude, int nx, int ny) {
+    public RegionCoordinate(String city, String state, double latitude, double longitude, int nx, int ny) {
         this.city = city;
         this.state = state;
         this.latitude = latitude;
