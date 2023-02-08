@@ -3,6 +3,7 @@ package com.example.weatherbackproject.infra;
 import com.example.weatherbackproject.dto.shortFcst.vilage.ShortVilageDto;
 import com.example.weatherbackproject.dto.shortFcst.vilage.ShortVilageResultApiDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,15 +16,17 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class ShortWeatherApiClient {
+@Qualifier("shortWeatherApiClient")
+public class ShortWeatherApiClientImpl implements WeatherApiClient<List<ShortVilageDto>> {
 
     private final RestTemplate restTemplate;
 
-    public ShortWeatherApiClient(RestTemplateBuilder restTemplateBuilder) {
+    public ShortWeatherApiClientImpl(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    public List<ShortVilageDto> requestShortVilageFcst(URI uri) {
+    @Override
+    public List<ShortVilageDto> requestWeather(URI uri) {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity httpEntity = new HttpEntity(headers);
 

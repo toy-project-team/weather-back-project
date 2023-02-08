@@ -1,7 +1,9 @@
 package com.example.weatherbackproject.dto.midFcst.land;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 
+@Builder
 public record MidLandDto(
         @JsonProperty("rnSt3Am") int rnSt3Am,
         @JsonProperty("rnSt3Pm") int rnSt3Pm,

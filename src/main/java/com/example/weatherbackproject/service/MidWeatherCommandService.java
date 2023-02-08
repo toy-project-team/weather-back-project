@@ -3,9 +3,9 @@ package com.example.weatherbackproject.service;
 import com.example.weatherbackproject.domain.*;
 import com.example.weatherbackproject.dto.midFcst.land.MidLandDto;
 import com.example.weatherbackproject.dto.midFcst.temperature.MidTemperatureDto;
-import com.example.weatherbackproject.infra.MidWeatherApiClient;
-import com.example.weatherbackproject.infra.MidWeatherUriBuilder;
+import com.example.weatherbackproject.infra.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,15 +19,20 @@ import java.util.List;
 @Service
 public class MidWeatherCommandService {
 
-    private final MidWeatherApiClient midWeatherApiService;
+    private final WeatherApiClient<MidLandDto> midLandFcstWeatherApiClient;
+    private final WeatherApiClient<MidTemperatureDto> midTaWeatherApiClient;
     private final MidWeatherUriBuilder midWeatherUriBuilderService;
     private final MidWeatherCloudRepository midWeatherCloudRepository;
     private final MidWeatherRainRepository midWeatherRainRepository;
     private final MidWeatherTemperatureRepository midWeatherTemperatureRepository;
     private final RegionCodeRepository regionCodeRepository;
 
-    public MidWeatherCommandService(MidWeatherApiClient midWeatherApiService, MidWeatherUriBuilder midWeatherUriBuilderService, MidWeatherCloudRepository midWeatherCloudRepository, MidWeatherRainRepository midWeatherRainRepository, MidWeatherTemperatureRepository midWeatherTemperatureRepository, RegionCodeRepository regionCodeRepository) {
-        this.midWeatherApiService = midWeatherApiService;
+    public MidWeatherCommandService(@Qualifier("midLandFcstWeatherApiClient") WeatherApiClient<MidLandDto> midLandFcstWeatherApiClient,
+                                    @Qualifier("midTaWeatherApiClient") WeatherApiClient<MidTemperatureDto> midTaWeatherApiClient, MidWeatherUriBuilder midWeatherUriBuilderService,
+                                    MidWeatherCloudRepository midWeatherCloudRepository, MidWeatherRainRepository midWeatherRainRepository, MidWeatherTemperatureRepository midWeatherTemperatureRepository,
+                                    RegionCodeRepository regionCodeRepository) {
+        this.midLandFcstWeatherApiClient = midLandFcstWeatherApiClient;
+        this.midTaWeatherApiClient = midTaWeatherApiClient;
         this.midWeatherUriBuilderService = midWeatherUriBuilderService;
         this.midWeatherCloudRepository = midWeatherCloudRepository;
         this.midWeatherRainRepository = midWeatherRainRepository;
@@ -140,7 +145,7 @@ public class MidWeatherCommandService {
 
         for (RegionCode code : regionCodes) {
             URI uri = midWeatherUriBuilderService.buildUriByLandFcst(code.getCode(), date + time);
-            MidLandDto midLandDto = midWeatherApiService.requestMidLandFcst(uri);
+            MidLandDto midLandDto = midLandFcstWeatherApiClient.requestWeather(uri);
 
             MidWeatherRain midWeatherRain = midWeatherRains.findMidWeatherRain(code.getId(), date);
             midWeatherRain.updateRain(midLandDto.rnSt4Am(), midLandDto.rnSt4Pm(), midLandDto.rnSt5Am(), midLandDto.rnSt5Pm(), midLandDto.rnSt6Am(), midLandDto.rnSt6Pm(), midLandDto.rnSt7Am(), midLandDto.rnSt7Pm(), midLandDto.rnSt8());
@@ -156,7 +161,7 @@ public class MidWeatherCommandService {
 
         for (RegionCode code : regionCodes) {
             URI uri = midWeatherUriBuilderService.buildUriByTa(code.getCode(), date + time);
-            MidTemperatureDto midTemperatureDto = midWeatherApiService.requestMidTa(uri);
+            MidTemperatureDto midTemperatureDto = midTaWeatherApiClient.requestWeather(uri);
 
             MidWeatherTemperature midWeatherTemperature = midWeatherTemperatures.findMidWeatherTemperatures(code.getId(), date);
             midWeatherTemperature.updateTemperature(midTemperatureDto.taMin4(), midTemperatureDto.taMax4(), midTemperatureDto.taMin5(), midTemperatureDto.taMax5(), midTemperatureDto.taMin6(), midTemperatureDto.taMax6(), midTemperatureDto.taMin7(), midTemperatureDto.taMax7(), midTemperatureDto.taMin8(), midTemperatureDto.taMax8());

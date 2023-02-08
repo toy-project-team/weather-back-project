@@ -2,9 +2,8 @@ package com.example.weatherbackproject.infra;
 
 import com.example.weatherbackproject.dto.midFcst.land.MidLandDto;
 import com.example.weatherbackproject.dto.midFcst.land.MidLandResultApiDto;
-import com.example.weatherbackproject.dto.midFcst.temperature.MidTemperatureDto;
-import com.example.weatherbackproject.dto.midFcst.temperature.MidTemperatureResultApiDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,15 +15,17 @@ import java.net.URI;
 
 @Slf4j
 @Component
-public class MidWeatherApiClient {
+@Qualifier("midLandFcstWeatherApiClient")
+public class MidLandFcstWeatherApiClientImpl implements WeatherApiClient<MidLandDto> {
 
     private final RestTemplate restTemplate;
 
-    public MidWeatherApiClient(RestTemplateBuilder restTemplateBuilder) {
+    public MidLandFcstWeatherApiClientImpl(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    public MidLandDto requestMidLandFcst(URI uri) {
+    @Override
+    public MidLandDto requestWeather(URI uri) {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity httpEntity = new HttpEntity(headers);
 
@@ -35,18 +36,5 @@ public class MidWeatherApiClient {
         }
 
         return midLandResultApiDto.getCommonResponse().getBody().getItems().getItem().get(0);
-    }
-
-    public MidTemperatureDto requestMidTa(URI uri) {
-        HttpHeaders headers = new HttpHeaders();
-        HttpEntity httpEntity = new HttpEntity(headers);
-
-        MidTemperatureResultApiDto midTemperatureResultApiDto = restTemplate.exchange(uri, HttpMethod.GET, httpEntity, MidTemperatureResultApiDto.class).getBody();
-
-        if (midTemperatureResultApiDto.getCommonResponse().getBody().getItems().getItem().size() == 0) {
-            throw new RuntimeException("");
-        }
-
-        return midTemperatureResultApiDto.getCommonResponse().getBody().getItems().getItem().get(0);
     }
 }

@@ -1,7 +1,9 @@
 package com.example.weatherbackproject.dto.midFcst.temperature;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 
+@Builder
 public record MidTemperatureDto(
         @JsonProperty("taMin3") int taMin3,
         @JsonProperty("taMax3") int taMax3,

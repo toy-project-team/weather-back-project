@@ -2,8 +2,9 @@ package com.example.weatherbackproject.service;
 
 import com.example.weatherbackproject.domain.*;
 import com.example.weatherbackproject.dto.shortFcst.vilage.ShortVilageDto;
-import com.example.weatherbackproject.infra.ShortWeatherApiClient;
+import com.example.weatherbackproject.infra.ShortWeatherApiClientImpl;
 import com.example.weatherbackproject.infra.ShortWeatherUriBuilder;
+import com.example.weatherbackproject.infra.WeatherApiClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,13 +21,13 @@ import java.util.List;
 public class ShortWeatherCommandService {
     private final ShortWeatherRepository shortWeatherRepository;
 
-    private final ShortWeatherApiClient shortWeatherApiClient;
+    private final WeatherApiClient<List<ShortVilageDto>> weatherApiClient;
     private final ShortWeatherUriBuilder shortWeatherUriBuilder;
     private final RegionCoordinateRepository regionCoordinateRepository;
 
-    public ShortWeatherCommandService(ShortWeatherApiClient shortWeatherApiClient, ShortWeatherUriBuilder shortWeatherUriBuilder, RegionCoordinateRepository regionCoordinateRepository,
+    public ShortWeatherCommandService(ShortWeatherApiClientImpl weatherApiClient, ShortWeatherUriBuilder shortWeatherUriBuilder, RegionCoordinateRepository regionCoordinateRepository,
                                       ShortWeatherRepository shortWeatherRepository) {
-        this.shortWeatherApiClient = shortWeatherApiClient;
+        this.weatherApiClient = weatherApiClient;
         this.shortWeatherUriBuilder = shortWeatherUriBuilder;
         this.regionCoordinateRepository = regionCoordinateRepository;
         this.shortWeatherRepository = shortWeatherRepository;
@@ -45,7 +46,7 @@ public class ShortWeatherCommandService {
             }
 
             URI uri = shortWeatherUriBuilder.buildUriByVilageFcst(date , baseTime, regionCoordinate.getNx(), regionCoordinate.getNy());
-            List<ShortVilageDto> shortVilageDtos = shortWeatherApiClient.requestShortVilageFcst(uri);
+            List<ShortVilageDto> shortVilageDtos = weatherApiClient.requestWeather(uri);
 
             String standDate = shortVilageDtos.get(0).fcstDate();
             String standTime = shortVilageDtos.get(0).fcstTime();
@@ -59,10 +60,10 @@ public class ShortWeatherCommandService {
 
             // 강수확률 POP, 강수형태 PTY, 강수량 PCP, 적설량 SNO, 하늘상태 SKY, 1시간 기온 TMP, 습도 REH
             for (ShortVilageDto shortVilageDto : shortVilageDtos) {
-                if (!standTime.equals(shortVilageDto.fcstTime())) {
+                if (!standDate.equals(shortVilageDto.fcstDate()) || !standTime.equals(shortVilageDto.fcstTime())) {
                     LocalDateTime inquiryDate = LocalDateTime.of(Integer.parseInt(standDate.substring(0, 4)), Integer.parseInt(standDate.substring(4, 6)), Integer.parseInt(standDate.substring(6)), Integer.parseInt(standTime.substring(0, 2)), 0);
 
-                    if (baseDates.contains(inquiryDate)) {
+                    if (dateTimeEquals(baseDates, inquiryDate)) {
                         ShortWeather shortWeather1 = shortWeathers.stream()
                                 .filter(shortWeather -> shortWeather.getInquiryDate().equals(inquiryDate))
                                 .findFirst()
@@ -122,5 +123,14 @@ public class ShortWeatherCommandService {
                 }
             }
         }
+    }
+
+    private boolean dateTimeEquals(List<LocalDateTime> baseDates, LocalDateTime target) {
+        for (LocalDateTime baseDate : baseDates) {
+            if (baseDate.isEqual(target)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
