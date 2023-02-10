@@ -23,9 +23,9 @@ public class MidWeatherQueryService {
     private final JpaMidWeatherCloudRepository midWeatherCloudRepository;
     private final JpaMidWeatherRainRepository midWeatherRainRepository;
     private final JpaMidWeatherTemperatureRepository midWeatherTemperatureRepository;
-    private final RegionCodeRepository regionCodeRepository;
+    private final JpaRegionCodeRepository regionCodeRepository;
 
-    public MidWeatherQueryService(JpaMidWeatherCloudRepository midWeatherCloudRepository, JpaMidWeatherRainRepository midWeatherRainRepository, JpaMidWeatherTemperatureRepository midWeatherTemperatureRepository, RegionCodeRepository regionCodeRepository) {
+    public MidWeatherQueryService(JpaMidWeatherCloudRepository midWeatherCloudRepository, JpaMidWeatherRainRepository midWeatherRainRepository, JpaMidWeatherTemperatureRepository midWeatherTemperatureRepository, JpaRegionCodeRepository regionCodeRepository) {
         this.midWeatherCloudRepository = midWeatherCloudRepository;
         this.midWeatherRainRepository = midWeatherRainRepository;
         this.midWeatherTemperatureRepository = midWeatherTemperatureRepository;

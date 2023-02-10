@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class MidWeatherTemperature extends BaseTimeEntity {
@@ -64,7 +65,15 @@ public class MidWeatherTemperature extends BaseTimeEntity {
         this.temperature8Max = temperature8Max;
     }
 
-    public void updateTemperature(int temperature4Min, int temperature4Max, int temperature5Min, int temperature5Max, int temperature6Min, int temperature6Max, int temperature7Min, int temperature7Max, int temperature8Min, int temperature8Max) {
+    @Builder
+    public MidWeatherTemperature(Long id, Long regionCodeId, String inquiryDate, int temperature0Min, int temperature0Max, int temperature1Min, int temperature1Max, int temperature2Min, int temperature2Max, int temperature3Min, int temperature3Max, int temperature4Min, int temperature4Max, int temperature5Min, int temperature5Max, int temperature6Min, int temperature6Max, int temperature7Min, int temperature7Max, int temperature8Min, int temperature8Max) {
+        this(regionCodeId, inquiryDate, temperature0Min, temperature0Max, temperature1Min, temperature1Max, temperature2Min, temperature2Max, temperature3Min, temperature3Max, temperature4Min, temperature4Max, temperature5Min, temperature5Max, temperature6Min, temperature6Max, temperature7Min, temperature7Max, temperature8Min, temperature8Max);
+        this.id = id;
+    }
+
+    public void updateTemperature(int temperature3Min, int temperature3Max, int temperature4Min, int temperature4Max, int temperature5Min, int temperature5Max, int temperature6Min, int temperature6Max, int temperature7Min, int temperature7Max, int temperature8Min, int temperature8Max) {
+        this.temperature3Min = temperature3Min;
+        this.temperature3Max = temperature3Max;
         this.temperature4Min = temperature4Min;
         this.temperature4Max = temperature4Max;
         this.temperature5Min = temperature5Min;

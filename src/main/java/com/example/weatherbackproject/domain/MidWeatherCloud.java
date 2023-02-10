@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class MidWeatherCloud extends BaseTimeEntity {
@@ -60,6 +61,12 @@ public class MidWeatherCloud extends BaseTimeEntity {
         this.cloud7Am = cloud7Am;
         this.cloud7Pm = cloud7Pm;
         this.cloud8 = cloud8;
+    }
+
+    @Builder
+    public MidWeatherCloud(Long id, Long regionCodeId, String inquiryDate, String cloud0Am, String cloud0Pm, String cloud1Am, String cloud1Pm, String cloud2Am, String cloud2Pm, String cloud3Am, String cloud3Pm, String cloud4Am, String cloud4Pm, String cloud5Am, String cloud5Pm, String cloud6Am, String cloud6Pm, String cloud7Am, String cloud7Pm, String cloud8) {
+        this(regionCodeId, inquiryDate, cloud0Am, cloud0Pm, cloud1Am, cloud1Pm, cloud2Am, cloud2Pm, cloud3Am, cloud3Pm, cloud4Am, cloud4Pm, cloud5Am, cloud5Pm, cloud6Am, cloud6Pm, cloud7Am, cloud7Pm, cloud8);
+        this.id = id;
     }
 
     public void updateCloud(String cloud3Am, String cloud3Pm, String cloud4Am, String cloud4Pm, String cloud5Am, String cloud5Pm, String cloud6Am, String cloud6Pm, String cloud7Am, String cloud7Pm, String cloud8) {

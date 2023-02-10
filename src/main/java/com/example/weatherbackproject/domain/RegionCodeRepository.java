@@ -1,13 +1,10 @@
 package com.example.weatherbackproject.domain;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
-import java.util.Optional;
 
-public interface RegionCodeRepository extends JpaRepository<RegionCode, Long> {
+public interface RegionCodeRepository {
 
-    Optional<RegionCode> findByTypeAndStateContaining(MidType type, String state);
+    RegionCode save(RegionCode regionCode);
 
     List<RegionCode> findAllByType(MidType type);
 }

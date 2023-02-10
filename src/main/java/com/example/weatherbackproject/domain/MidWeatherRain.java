@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class MidWeatherRain extends BaseTimeEntity {
@@ -62,7 +63,15 @@ public class MidWeatherRain extends BaseTimeEntity {
         this.rainFall8 = rainFall8;
     }
 
-    public void updateRain(int rainFall4Am, int rainFall4Pm, int rainFall5Am, int rainFall5Pm, int rainFall6Am, int rainFall6Pm, int rainFall7Am, int rainFall7Pm, int rainFall8) {
+    @Builder
+    public MidWeatherRain(Long id, Long regionCodeId, String inquiryDate, int rainFall0Am, int rainFall0Pm, int rainFall1Am, int rainFall1Pm, int rainFall2Am, int rainFall2Pm, int rainFall3Am, int rainFall3Pm, int rainFall4Am, int rainFall4Pm, int rainFall5Am, int rainFall5Pm, int rainFall6Am, int rainFall6Pm, int rainFall7Am, int rainFall7Pm, int rainFall8) {
+        this(regionCodeId, inquiryDate, rainFall0Am, rainFall0Pm, rainFall1Am, rainFall1Pm, rainFall2Am, rainFall2Pm, rainFall3Am, rainFall3Pm, rainFall4Am, rainFall4Pm, rainFall5Am, rainFall5Pm, rainFall6Am, rainFall6Pm, rainFall7Am, rainFall7Pm, rainFall8);
+        this.id = id;
+    }
+
+    public void updateRain(int rainFall3Am, int rainFall3Pm, int rainFall4Am, int rainFall4Pm, int rainFall5Am, int rainFall5Pm, int rainFall6Am, int rainFall6Pm, int rainFall7Am, int rainFall7Pm, int rainFall8) {
+        this.rainFall3Am = rainFall3Am;
+        this.rainFall3Pm = rainFall3Pm;
         this.rainFall4Am = rainFall4Am;
         this.rainFall4Pm = rainFall4Pm;
         this.rainFall5Am = rainFall5Am;

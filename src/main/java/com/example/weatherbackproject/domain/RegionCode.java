@@ -1,6 +1,7 @@
 package com.example.weatherbackproject.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,5 +29,11 @@ public class RegionCode {
         this.state = state;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    @Builder
+    public RegionCode(Long id, MidType type, String code, String state, double latitude, double longitude) {
+        this(type, code, state, latitude, longitude);
+        this.id = id;
     }
 }
