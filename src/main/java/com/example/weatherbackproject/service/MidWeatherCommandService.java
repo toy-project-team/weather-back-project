@@ -49,58 +49,12 @@ public class MidWeatherCommandService {
         List<MidWeatherCloud> beforeMidWeatherCloud = midWeatherCloudRepository.findAllByInquiryDate(beforeDate);
 
         for (MidWeatherRain midWeatherRain : beforeMidWeatherRains) {
-            midWeatherRainRepository.save(makeMidWeatherRain(nowDate, midWeatherRain));
+            midWeatherRainRepository.save(midWeatherRain.nextMidWeatherRain(nowDate, midWeatherRain));
         }
 
         for (MidWeatherCloud midWeatherCloud : beforeMidWeatherCloud) {
-            midWeatherCloudRepository.save(makeMidWeatherCloud(nowDate, midWeatherCloud));
+            midWeatherCloudRepository.save(midWeatherCloud.nextMidWeatherCloud(nowDate, midWeatherCloud));
         }
-    }
-
-    private MidWeatherRain makeMidWeatherRain(String nowDate, MidWeatherRain midWeatherRain) {
-        return MidWeatherRain.builder()
-                .regionCodeId(midWeatherRain.getRegionCodeId())
-                .inquiryDate(nowDate)
-                .rainFall0Am(midWeatherRain.getRainFall1Am())
-                .rainFall0Pm(midWeatherRain.getRainFall1Pm())
-                .rainFall1Am(midWeatherRain.getRainFall2Am())
-                .rainFall1Pm(midWeatherRain.getRainFall2Pm())
-                .rainFall2Am(midWeatherRain.getRainFall3Am())
-                .rainFall2Pm(midWeatherRain.getRainFall3Pm())
-                .rainFall3Am(midWeatherRain.getRainFall4Am())
-                .rainFall3Pm(midWeatherRain.getRainFall4Pm())
-                .rainFall4Am(midWeatherRain.getRainFall5Am())
-                .rainFall4Pm(midWeatherRain.getRainFall5Pm())
-                .rainFall5Am(midWeatherRain.getRainFall6Am())
-                .rainFall5Pm(midWeatherRain.getRainFall6Pm())
-                .rainFall6Am(midWeatherRain.getRainFall7Am())
-                .rainFall6Pm(midWeatherRain.getRainFall7Pm())
-                .rainFall7Am(midWeatherRain.getRainFall8())
-                .rainFall7Pm(midWeatherRain.getRainFall8())
-                .build();
-    }
-
-    private MidWeatherCloud makeMidWeatherCloud(String nowDate, MidWeatherCloud midWeatherCloud) {
-        return MidWeatherCloud.builder()
-                .regionCodeId(midWeatherCloud.getRegionCodeId())
-                .inquiryDate(nowDate)
-                .cloud0Am(midWeatherCloud.getCloud1Am())
-                .cloud0Pm(midWeatherCloud.getCloud1Pm())
-                .cloud1Am(midWeatherCloud.getCloud2Am())
-                .cloud1Pm(midWeatherCloud.getCloud2Pm())
-                .cloud2Am(midWeatherCloud.getCloud3Am())
-                .cloud2Pm(midWeatherCloud.getCloud3Pm())
-                .cloud3Am(midWeatherCloud.getCloud4Am())
-                .cloud3Pm(midWeatherCloud.getCloud4Pm())
-                .cloud4Am(midWeatherCloud.getCloud5Am())
-                .cloud4Pm(midWeatherCloud.getCloud5Pm())
-                .cloud5Am(midWeatherCloud.getCloud6Am())
-                .cloud5Pm(midWeatherCloud.getCloud6Pm())
-                .cloud6Am(midWeatherCloud.getCloud7Am())
-                .cloud6Pm(midWeatherCloud.getCloud7Pm())
-                .cloud7Am(midWeatherCloud.getCloud8())
-                .cloud7Pm(midWeatherCloud.getCloud8())
-                .build();
     }
 
     public void createMidTa() {
@@ -111,31 +65,8 @@ public class MidWeatherCommandService {
         List<MidWeatherTemperature> midWeatherTemperatures = midWeatherTemperatureRepository.findAllByInquiryDate(beforeDate);
 
         for (MidWeatherTemperature midWeatherTemperature : midWeatherTemperatures) {
-            midWeatherTemperatureRepository.save(makeMidWeatherTemperature(nowDate, midWeatherTemperature));
+            midWeatherTemperatureRepository.save(midWeatherTemperature.nextMidWeatherTemperature(nowDate, midWeatherTemperature));
         }
-    }
-
-    private MidWeatherTemperature makeMidWeatherTemperature(String nowDate, MidWeatherTemperature midWeatherTemperature) {
-        return MidWeatherTemperature.builder()
-                .regionCodeId(midWeatherTemperature.getRegionCodeId())
-                .inquiryDate(nowDate)
-                .temperature0Min(midWeatherTemperature.getTemperature1Min())
-                .temperature0Max(midWeatherTemperature.getTemperature1Max())
-                .temperature1Min(midWeatherTemperature.getTemperature2Min())
-                .temperature1Max(midWeatherTemperature.getTemperature2Max())
-                .temperature2Min(midWeatherTemperature.getTemperature3Min())
-                .temperature2Max(midWeatherTemperature.getTemperature3Max())
-                .temperature3Min(midWeatherTemperature.getTemperature4Min())
-                .temperature3Max(midWeatherTemperature.getTemperature4Max())
-                .temperature4Min(midWeatherTemperature.getTemperature5Min())
-                .temperature4Max(midWeatherTemperature.getTemperature5Max())
-                .temperature5Min(midWeatherTemperature.getTemperature6Min())
-                .temperature5Max(midWeatherTemperature.getTemperature6Max())
-                .temperature6Min(midWeatherTemperature.getTemperature7Min())
-                .temperature6Max(midWeatherTemperature.getTemperature7Max())
-                .temperature7Min(midWeatherTemperature.getTemperature8Min())
-                .temperature7Max(midWeatherTemperature.getTemperature8Max())
-                .build();
     }
 
     public void updateMidLandFcst(String date, String time) {

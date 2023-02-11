@@ -86,4 +86,27 @@ public class MidWeatherCloud extends BaseTimeEntity {
     public boolean equalsCodeAndDate(Long codeId, String date) {
         return regionCodeId.equals(codeId) && inquiryDate.equals(date);
     }
+
+    public MidWeatherCloud nextMidWeatherCloud(String nowDate, MidWeatherCloud midWeatherCloud) {
+        return MidWeatherCloud.builder()
+                .regionCodeId(midWeatherCloud.getRegionCodeId())
+                .inquiryDate(nowDate)
+                .cloud0Am(midWeatherCloud.getCloud1Am())
+                .cloud0Pm(midWeatherCloud.getCloud1Pm())
+                .cloud1Am(midWeatherCloud.getCloud2Am())
+                .cloud1Pm(midWeatherCloud.getCloud2Pm())
+                .cloud2Am(midWeatherCloud.getCloud3Am())
+                .cloud2Pm(midWeatherCloud.getCloud3Pm())
+                .cloud3Am(midWeatherCloud.getCloud4Am())
+                .cloud3Pm(midWeatherCloud.getCloud4Pm())
+                .cloud4Am(midWeatherCloud.getCloud5Am())
+                .cloud4Pm(midWeatherCloud.getCloud5Pm())
+                .cloud5Am(midWeatherCloud.getCloud6Am())
+                .cloud5Pm(midWeatherCloud.getCloud6Pm())
+                .cloud6Am(midWeatherCloud.getCloud7Am())
+                .cloud6Pm(midWeatherCloud.getCloud7Pm())
+                .cloud7Am(midWeatherCloud.getCloud8())
+                .cloud7Pm(midWeatherCloud.getCloud8())
+                .build();
+    }
 }

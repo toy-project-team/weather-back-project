@@ -15,10 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class MidWeatherCommandServiceTest {
 
-    private MidWeatherCloudRepository midWeatherCloudRepository = new InMemoryMidWeatherCloudRepository();
-    private MidWeatherRainRepository midWeatherRainRepository = new InMemoryMidWeatherRainRepository();
-    private MidWeatherTemperatureRepository midWeatherTemperatureRepository = new InMemoryMidWeatherTemperatureRepository();
-    private RegionCodeRepository regionCodeRepository = new InMemoryRegionCodeRepository();
+    private MidWeatherCloudRepository midWeatherCloudRepository;
+    private MidWeatherRainRepository midWeatherRainRepository;
+    private MidWeatherTemperatureRepository midWeatherTemperatureRepository;
     private MidWeatherCommandService midWeatherCommandService;
 
     private RegionCode regionCodeLand;
@@ -29,6 +28,11 @@ class MidWeatherCommandServiceTest {
 
     @BeforeEach
     void setUp() {
+        midWeatherCloudRepository = new InMemoryMidWeatherCloudRepository();
+        midWeatherRainRepository = new InMemoryMidWeatherRainRepository();
+        midWeatherTemperatureRepository = new InMemoryMidWeatherTemperatureRepository();
+        RegionCodeRepository regionCodeRepository = new InMemoryRegionCodeRepository();
+
         midWeatherCommandService = new MidWeatherCommandService(new FakeMidLandFcstWeatherApiClient(), new FakeMidTaWeatherApiClient(), new MidWeatherUriBuilder(), midWeatherCloudRepository, midWeatherRainRepository,
                 midWeatherTemperatureRepository, regionCodeRepository);
 

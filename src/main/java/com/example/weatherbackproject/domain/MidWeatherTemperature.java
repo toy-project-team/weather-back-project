@@ -89,4 +89,27 @@ public class MidWeatherTemperature extends BaseTimeEntity {
     public boolean equalsCodeAndDate(Long codeId, String date) {
         return regionCodeId.equals(codeId) && inquiryDate.equals(date);
     }
+
+    public MidWeatherTemperature nextMidWeatherTemperature(String nowDate, MidWeatherTemperature midWeatherTemperature) {
+        return MidWeatherTemperature.builder()
+                .regionCodeId(midWeatherTemperature.getRegionCodeId())
+                .inquiryDate(nowDate)
+                .temperature0Min(midWeatherTemperature.getTemperature1Min())
+                .temperature0Max(midWeatherTemperature.getTemperature1Max())
+                .temperature1Min(midWeatherTemperature.getTemperature2Min())
+                .temperature1Max(midWeatherTemperature.getTemperature2Max())
+                .temperature2Min(midWeatherTemperature.getTemperature3Min())
+                .temperature2Max(midWeatherTemperature.getTemperature3Max())
+                .temperature3Min(midWeatherTemperature.getTemperature4Min())
+                .temperature3Max(midWeatherTemperature.getTemperature4Max())
+                .temperature4Min(midWeatherTemperature.getTemperature5Min())
+                .temperature4Max(midWeatherTemperature.getTemperature5Max())
+                .temperature5Min(midWeatherTemperature.getTemperature6Min())
+                .temperature5Max(midWeatherTemperature.getTemperature6Max())
+                .temperature6Min(midWeatherTemperature.getTemperature7Min())
+                .temperature6Max(midWeatherTemperature.getTemperature7Max())
+                .temperature7Min(midWeatherTemperature.getTemperature8Min())
+                .temperature7Max(midWeatherTemperature.getTemperature8Max())
+                .build();
+    }
 }

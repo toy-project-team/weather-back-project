@@ -86,4 +86,27 @@ public class MidWeatherRain extends BaseTimeEntity {
     public boolean equalsCodeAndDate(Long codeId, String date) {
         return regionCodeId.equals(codeId) && inquiryDate.equals(date);
     }
+
+    public MidWeatherRain nextMidWeatherRain(String nowDate, MidWeatherRain midWeatherRain) {
+        return MidWeatherRain.builder()
+                .regionCodeId(midWeatherRain.getRegionCodeId())
+                .inquiryDate(nowDate)
+                .rainFall0Am(midWeatherRain.getRainFall1Am())
+                .rainFall0Pm(midWeatherRain.getRainFall1Pm())
+                .rainFall1Am(midWeatherRain.getRainFall2Am())
+                .rainFall1Pm(midWeatherRain.getRainFall2Pm())
+                .rainFall2Am(midWeatherRain.getRainFall3Am())
+                .rainFall2Pm(midWeatherRain.getRainFall3Pm())
+                .rainFall3Am(midWeatherRain.getRainFall4Am())
+                .rainFall3Pm(midWeatherRain.getRainFall4Pm())
+                .rainFall4Am(midWeatherRain.getRainFall5Am())
+                .rainFall4Pm(midWeatherRain.getRainFall5Pm())
+                .rainFall5Am(midWeatherRain.getRainFall6Am())
+                .rainFall5Pm(midWeatherRain.getRainFall6Pm())
+                .rainFall6Am(midWeatherRain.getRainFall7Am())
+                .rainFall6Pm(midWeatherRain.getRainFall7Pm())
+                .rainFall7Am(midWeatherRain.getRainFall8())
+                .rainFall7Pm(midWeatherRain.getRainFall8())
+                .build();
+    }
 }
