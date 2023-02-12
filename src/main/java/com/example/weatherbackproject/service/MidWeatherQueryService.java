@@ -20,12 +20,12 @@ import java.util.Locale;
 @Service
 public class MidWeatherQueryService {
 
-    private final JpaMidWeatherCloudRepository midWeatherCloudRepository;
-    private final JpaMidWeatherRainRepository midWeatherRainRepository;
-    private final JpaMidWeatherTemperatureRepository midWeatherTemperatureRepository;
-    private final JpaRegionCodeRepository regionCodeRepository;
+    private final MidWeatherCloudRepository midWeatherCloudRepository;
+    private final MidWeatherRainRepository midWeatherRainRepository;
+    private final MidWeatherTemperatureRepository midWeatherTemperatureRepository;
+    private final RegionCodeRepository regionCodeRepository;
 
-    public MidWeatherQueryService(JpaMidWeatherCloudRepository midWeatherCloudRepository, JpaMidWeatherRainRepository midWeatherRainRepository, JpaMidWeatherTemperatureRepository midWeatherTemperatureRepository, JpaRegionCodeRepository regionCodeRepository) {
+    public MidWeatherQueryService(MidWeatherCloudRepository midWeatherCloudRepository, MidWeatherRainRepository midWeatherRainRepository, MidWeatherTemperatureRepository midWeatherTemperatureRepository, RegionCodeRepository regionCodeRepository) {
         this.midWeatherCloudRepository = midWeatherCloudRepository;
         this.midWeatherRainRepository = midWeatherRainRepository;
         this.midWeatherTemperatureRepository = midWeatherTemperatureRepository;

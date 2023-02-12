@@ -7,7 +7,7 @@ public interface MidWeatherRainRepository {
 
     MidWeatherRain save(MidWeatherRain midWeatherRain);
 
-    Optional<MidWeatherRain> findById(Long id);
-
     List<MidWeatherRain> findAllByInquiryDate(String date);
+
+    Optional<MidWeatherRain> findByRegionCodeIdAndInquiryDate(Long regionCodeId, String date);
 }

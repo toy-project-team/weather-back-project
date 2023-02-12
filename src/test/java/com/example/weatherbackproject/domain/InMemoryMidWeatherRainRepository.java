@@ -15,14 +15,16 @@ public class InMemoryMidWeatherRainRepository implements MidWeatherRainRepositor
     }
 
     @Override
-    public Optional<MidWeatherRain> findById(Long id) {
-        return Optional.ofNullable(midWeatherRains.get(id));
-    }
-
-    @Override
     public List<MidWeatherRain> findAllByInquiryDate(String date) {
         return midWeatherRains.values().stream()
                 .filter(midWeatherRain -> midWeatherRain.getInquiryDate().equals(date))
                 .toList();
+    }
+
+    @Override
+    public Optional<MidWeatherRain> findByRegionCodeIdAndInquiryDate(Long regionCodeId, String date) {
+        return midWeatherRains.values().stream()
+                .filter(midWeatherRain -> midWeatherRain.equalsCodeAndDate(regionCodeId, date))
+                .findFirst();
     }
 }

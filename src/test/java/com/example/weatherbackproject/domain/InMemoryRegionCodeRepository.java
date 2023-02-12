@@ -3,6 +3,7 @@ package com.example.weatherbackproject.domain;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class InMemoryRegionCodeRepository implements RegionCodeRepository {
     private final Map<Long, RegionCode> regionCodes = new HashMap<>();
@@ -18,5 +19,12 @@ public class InMemoryRegionCodeRepository implements RegionCodeRepository {
         return regionCodes.values().stream()
                 .filter(regionCode -> regionCode.getType().equals(type))
                 .toList();
+    }
+
+    @Override
+    public Optional<RegionCode> findByTypeAndStateContaining(MidType type, String state) {
+        return regionCodes.values().stream()
+                .filter(regionCode -> regionCode.getType().equals(type) && regionCode.getState().equals(state))
+                .findFirst();
     }
 }
