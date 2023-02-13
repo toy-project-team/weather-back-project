@@ -75,14 +75,18 @@ public class MidWeatherCommandService {
         MidWeatherClouds midWeatherClouds = new MidWeatherClouds(midWeatherCloudRepository.findAllByInquiryDate(date));
 
         for (RegionCode code : regionCodes) {
-            URI uri = midWeatherUriBuilderService.buildUriByLandFcst(code.getCode(), date + time);
-            MidLandDto midLandDto = midLandFcstWeatherApiClient.requestWeather(uri);
+            try {
+                URI uri = midWeatherUriBuilderService.buildUriByLandFcst(code.getCode(), date + time);
+                MidLandDto midLandDto = midLandFcstWeatherApiClient.requestWeather(uri);
 
-            MidWeatherRain midWeatherRain = midWeatherRains.findMidWeatherRain(code.getId(), date);
-            midWeatherRain.updateRain(midLandDto.rnSt3Am(), midLandDto.rnSt3Pm(), midLandDto.rnSt4Am(), midLandDto.rnSt4Pm(), midLandDto.rnSt5Am(), midLandDto.rnSt5Pm(), midLandDto.rnSt6Am(), midLandDto.rnSt6Pm(), midLandDto.rnSt7Am(), midLandDto.rnSt7Pm(), midLandDto.rnSt8());
+                MidWeatherRain midWeatherRain = midWeatherRains.findMidWeatherRain(code.getId(), date);
+                midWeatherRain.updateRain(midLandDto.rnSt3Am(), midLandDto.rnSt3Pm(), midLandDto.rnSt4Am(), midLandDto.rnSt4Pm(), midLandDto.rnSt5Am(), midLandDto.rnSt5Pm(), midLandDto.rnSt6Am(), midLandDto.rnSt6Pm(), midLandDto.rnSt7Am(), midLandDto.rnSt7Pm(), midLandDto.rnSt8());
 
-            MidWeatherCloud midWeatherCloud = midWeatherClouds.findMidWeatherCloud(code.getId(), date);
-            midWeatherCloud.updateCloud(midLandDto.wf3Am(), midLandDto.wf3Pm(), midLandDto.wf4Am(), midLandDto.wf4Pm(), midLandDto.wf5Am(), midLandDto.wf5Pm(), midLandDto.wf6Am(), midLandDto.wf6Pm(), midLandDto.wf7Am(), midLandDto.wf7Pm(), midLandDto.wf8());
+                MidWeatherCloud midWeatherCloud = midWeatherClouds.findMidWeatherCloud(code.getId(), date);
+                midWeatherCloud.updateCloud(midLandDto.wf3Am(), midLandDto.wf3Pm(), midLandDto.wf4Am(), midLandDto.wf4Pm(), midLandDto.wf5Am(), midLandDto.wf5Pm(), midLandDto.wf6Am(), midLandDto.wf6Pm(), midLandDto.wf7Am(), midLandDto.wf7Pm(), midLandDto.wf8());
+            } catch (Exception e) {
+                log.error("[MidWeatherCommandService.updateMidLandFcst] date : {}, time : {}, code : {}, 도시 : {}", date, time, code.getCode(), code.getState());
+            }
         }
     }
 
@@ -91,11 +95,15 @@ public class MidWeatherCommandService {
         MidWeatherTemperatures midWeatherTemperatures = new MidWeatherTemperatures(midWeatherTemperatureRepository.findAllByInquiryDate(date));
 
         for (RegionCode code : regionCodes) {
-            URI uri = midWeatherUriBuilderService.buildUriByTa(code.getCode(), date + time);
-            MidTemperatureDto midTemperatureDto = midTaWeatherApiClient.requestWeather(uri);
+            try {
+                URI uri = midWeatherUriBuilderService.buildUriByTa(code.getCode(), date + time);
+                MidTemperatureDto midTemperatureDto = midTaWeatherApiClient.requestWeather(uri);
 
-            MidWeatherTemperature midWeatherTemperature = midWeatherTemperatures.findMidWeatherTemperatures(code.getId(), date);
-            midWeatherTemperature.updateTemperature(midTemperatureDto.taMin3(), midTemperatureDto.taMax3(), midTemperatureDto.taMin4(), midTemperatureDto.taMax4(), midTemperatureDto.taMin5(), midTemperatureDto.taMax5(), midTemperatureDto.taMin6(), midTemperatureDto.taMax6(), midTemperatureDto.taMin7(), midTemperatureDto.taMax7(), midTemperatureDto.taMin8(), midTemperatureDto.taMax8());
+                MidWeatherTemperature midWeatherTemperature = midWeatherTemperatures.findMidWeatherTemperatures(code.getId(), date);
+                midWeatherTemperature.updateTemperature(midTemperatureDto.taMin3(), midTemperatureDto.taMax3(), midTemperatureDto.taMin4(), midTemperatureDto.taMax4(), midTemperatureDto.taMin5(), midTemperatureDto.taMax5(), midTemperatureDto.taMin6(), midTemperatureDto.taMax6(), midTemperatureDto.taMin7(), midTemperatureDto.taMax7(), midTemperatureDto.taMin8(), midTemperatureDto.taMax8());
+            } catch (Exception e) {
+                log.error("[MidWeatherCommandService.updateMidTa] date : {}, time : {}, code : {}, 도시 : {}", date, time, code.getCode(), code.getState());
+            }
         }
     }
 }
