@@ -1,11 +1,11 @@
 package com.example.weatherbackproject.domain;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface ShortWeatherRepository extends JpaRepository<ShortWeather, Long>, ShortWeatherRepositoryCustom {
+public interface ShortWeatherRepository {
 
-    List<ShortWeather> findByRegionCodeIdAndInquiryDateGreaterThanEqual(Long regionCodeId, LocalDateTime date);
+    ShortWeather save(ShortWeather shortWeather);
+
+    List<ShortWeather> findByRegionCodeIdAndInquiryDateGreaterThanEqualOrderByInquiryDateAsc(Long regionCodeId, LocalDateTime date);
 }

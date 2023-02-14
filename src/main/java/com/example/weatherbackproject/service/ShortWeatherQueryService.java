@@ -1,9 +1,6 @@
 package com.example.weatherbackproject.service;
 
-import com.example.weatherbackproject.domain.RegionCoordinate;
-import com.example.weatherbackproject.domain.RegionCoordinateRepository;
-import com.example.weatherbackproject.domain.ShortWeather;
-import com.example.weatherbackproject.domain.ShortWeatherRepository;
+import com.example.weatherbackproject.domain.*;
 import com.example.weatherbackproject.dto.shortFcst.ShortWeatherResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -32,7 +29,7 @@ public class ShortWeatherQueryService {
         RegionCoordinate regionCoordinate = regionCoordinateRepository.findByCityAndState(city, state).orElseThrow();
 
         LocalDateTime now = LocalDateTime.now();
-        List<ShortWeather> shortWeathers = shortWeatherRepository.findShortWeatherCurrentTime(now, regionCoordinate.getId());
+        List<ShortWeather> shortWeathers = shortWeatherRepository.findByRegionCodeIdAndInquiryDateGreaterThanEqualOrderByInquiryDateAsc(regionCoordinate.getId(), now);
 
         return shortWeathers.stream()
                 .map(shortWeather -> ShortWeatherResponse.builder()

@@ -5,6 +5,7 @@ import com.example.weatherbackproject.dto.shortFcst.vilage.ShortVilageDto;
 import com.example.weatherbackproject.infra.ShortWeatherUriBuilder;
 import com.example.weatherbackproject.infra.WeatherApiClient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -24,7 +25,7 @@ public class ShortWeatherCommandService {
     private final RegionCoordinateRepository regionCoordinateRepository;
     private final ShortWeatherRepository shortWeatherRepository;
 
-    public ShortWeatherCommandService(WeatherApiClient<List<ShortVilageDto>> weatherApiClient, ShortWeatherUriBuilder shortWeatherUriBuilder, RegionCoordinateRepository regionCoordinateRepository,
+    public ShortWeatherCommandService(@Qualifier("shortWeatherApiClient") WeatherApiClient<List<ShortVilageDto>> weatherApiClient, ShortWeatherUriBuilder shortWeatherUriBuilder, RegionCoordinateRepository regionCoordinateRepository,
                                       ShortWeatherRepository shortWeatherRepository) {
         this.weatherApiClient = weatherApiClient;
         this.shortWeatherUriBuilder = shortWeatherUriBuilder;
@@ -36,7 +37,7 @@ public class ShortWeatherCommandService {
         List<RegionCoordinate> regionCoordinates = regionCoordinateRepository.findAll();
         for (RegionCoordinate regionCoordinate : regionCoordinates) {
             LocalDateTime now = LocalDateTime.now();
-            List<ShortWeather> shortWeathers = shortWeatherRepository.findByRegionCodeIdAndInquiryDateGreaterThanEqual(regionCoordinate.getId(), now);
+            List<ShortWeather> shortWeathers = shortWeatherRepository.findByRegionCodeIdAndInquiryDateGreaterThanEqualOrderByInquiryDateAsc(regionCoordinate.getId(), now);
             List<LocalDateTime> baseDates = Collections.emptyList();
 
             if (!CollectionUtils.isEmpty(shortWeathers)) {
