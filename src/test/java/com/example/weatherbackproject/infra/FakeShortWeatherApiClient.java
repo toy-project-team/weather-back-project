@@ -16,12 +16,19 @@ public class FakeShortWeatherApiClient implements WeatherApiClient<List<ShortVil
 
         return Arrays.asList(
                 new ShortVilageDto(now, "0200", "POP", now, "0200", "10", 37.56100277777777, 126.99964166666666),
-                new ShortVilageDto(now, "0200", "PTY", now, "0200", "비", 37.56100277777777, 126.99964166666666),
+                new ShortVilageDto(now, "0200", "PTY", now, "0200", "0", 37.56100277777777, 126.99964166666666),
                 new ShortVilageDto(now, "0200", "PCP", now, "0200", "5", 37.56100277777777, 126.99964166666666),
                 new ShortVilageDto(now, "0200", "SNO", now, "0200", "0", 37.56100277777777, 126.99964166666666),
-                new ShortVilageDto(now, "0200", "SKY", now, "0200", "구름많음", 37.56100277777777, 126.99964166666666),
+                new ShortVilageDto(now, "0200", "SKY", now, "0200", "1", 37.56100277777777, 126.99964166666666),
                 new ShortVilageDto(now, "0200", "TMP", now, "0200", "15", 37.56100277777777, 126.99964166666666),
-                new ShortVilageDto(now, "0200", "REH", now, "0200", "70", 37.56100277777777, 126.99964166666666)
+                new ShortVilageDto(now, "0200", "REH", now, "0200", "70", 37.56100277777777, 126.99964166666666),
+                new ShortVilageDto(now, "0300", "POP", now, "0300", "15", 37.56100277777777, 126.99964166666666),
+                new ShortVilageDto(now, "0300", "PTY", now, "0300", "0", 37.56100277777777, 126.99964166666666),
+                new ShortVilageDto(now, "0300", "PCP", now, "0300", "10", 37.56100277777777, 126.99964166666666),
+                new ShortVilageDto(now, "0300", "SNO", now, "0300", "0", 37.56100277777777, 126.99964166666666),
+                new ShortVilageDto(now, "0300", "SKY", now, "0300", "1", 37.56100277777777, 126.99964166666666),
+                new ShortVilageDto(now, "0300", "TMP", now, "0300", "20", 37.56100277777777, 126.99964166666666),
+                new ShortVilageDto(now, "0300", "REH", now, "0300", "75", 37.56100277777777, 126.99964166666666)
         );
     }
 }
