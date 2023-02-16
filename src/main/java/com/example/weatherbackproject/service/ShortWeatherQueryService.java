@@ -25,10 +25,9 @@ public class ShortWeatherQueryService {
     }
 
 
-    public List<ShortWeatherResponse> getShortWeatherList(String city, String state) {
+    public List<ShortWeatherResponse> getShortWeatherList(String city, String state, LocalDateTime now) {
         RegionCoordinate regionCoordinate = regionCoordinateRepository.findByCityAndState(city, state).orElseThrow();
 
-        LocalDateTime now = LocalDateTime.now();
         List<ShortWeather> shortWeathers = shortWeatherRepository.findByRegionCodeIdAndInquiryDateGreaterThanEqualOrderByInquiryDateAsc(regionCoordinate.getId(), now);
 
         return shortWeathers.stream()

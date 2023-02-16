@@ -119,6 +119,36 @@ public class ShortWeatherCommandService {
                         humidity = Integer.parseInt(shortVilageDto.fcstValue());
                     }
                 }
+
+                if (!standDate.equals(shortVilageDtos.get(shortVilageDtos.size() - 1).fcstDate()) || !standTime.equals(shortVilageDtos.get(shortVilageDtos.size() - 1).fcstDate())) {
+                    standDate = shortVilageDtos.get(shortVilageDtos.size() - 1).fcstDate();
+                    standTime = shortVilageDtos.get(shortVilageDtos.size() - 1).fcstDate();
+
+                    LocalDateTime inquiryDate = LocalDateTime.of(Integer.parseInt(standDate.substring(0, 4)), Integer.parseInt(standDate.substring(4, 6)), Integer.parseInt(standDate.substring(6)), Integer.parseInt(standTime.substring(0, 2)), 0);
+
+                    if (dateTimeEquals(baseDates, inquiryDate)) {
+                        ShortWeather shortWeather1 = shortWeathers.stream()
+                                .filter(shortWeather -> shortWeather.getInquiryDate().equals(inquiryDate))
+                                .findFirst()
+                                .orElseThrow();
+
+                        shortWeather1.updateWeather(rainProbability, precipitationForm, rainPrecipitation, snowAmount, cloudState, hourTemperature, humidity);
+                    } else {
+                        shortWeatherRepository.save(
+                                ShortWeather.builder()
+                                        .regionCodeId(regionCoordinate.getId())
+                                        .inquiryDate(inquiryDate)
+                                        .rainProbability(rainProbability)
+                                        .precipitationForm(precipitationForm)
+                                        .rainPrecipitation(rainPrecipitation)
+                                        .snowAmount(snowAmount)
+                                        .cloudState(cloudState)
+                                        .hourTemperature(hourTemperature)
+                                        .humidity(humidity)
+                                        .build()
+                        );
+                    }
+                }
             } catch (Exception e) {
                 log.error("[ShortWeatherCommandService.createShortVilageFcst] date : {}, time : {}, city : {}, state : {}", date, baseTime, regionCoordinate.getCity(), regionCoordinate.getState());
             }

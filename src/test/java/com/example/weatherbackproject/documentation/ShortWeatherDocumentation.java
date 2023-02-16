@@ -12,6 +12,7 @@ import org.springframework.restdocs.payload.JsonFieldType;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
@@ -42,7 +43,7 @@ public class ShortWeatherDocumentation extends BaseDocumentation {
                         .build()
         );
 
-        when(shortWeatherQueryService.getShortWeatherList(anyString(), anyString())).thenReturn(shortWeatherResponses);
+        when(shortWeatherQueryService.getShortWeatherList(anyString(), anyString(), any())).thenReturn(shortWeatherResponses);
 
         RestAssured
                 .given(spec).log().all()

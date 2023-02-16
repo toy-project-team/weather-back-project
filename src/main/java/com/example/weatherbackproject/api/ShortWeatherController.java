@@ -6,6 +6,7 @@ import com.example.weatherbackproject.service.ShortWeatherQueryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -21,7 +22,8 @@ public class ShortWeatherController {
 
     @GetMapping("/api/short")
     private List<ShortWeatherResponse> shortWeatherList(String city, String state) {
-        return shortWeatherQueryService.getShortWeatherList(city, state);
+        LocalDateTime now = LocalDateTime.now();
+        return shortWeatherQueryService.getShortWeatherList(city, state, now);
     }
 
     @GetMapping("/api/short/save")
